@@ -1,0 +1,8 @@
+export const home = 'https://otruyenapi.com/v1/api/home'
+export const comicNew = 'https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=2'
+export const comingSoon = 'https://otruyenapi.com/v1/api/danh-sach/sap-ra-mat?page=1'
+export const nowReleased = 'https://otruyenapi.com/v1/api/danh-sach/dang-phat-hanh?page=1'
+export const completed = 'https://otruyenapi.com/v1/api/danh-sach/hoan-thanh?page=1'
+export const category = 'https://otruyenapi.com/v1/api/the-loai'
+export const search = 'https://otruyenapi.com/v1/api/tim-kiem?keyword='
+export const detail = 'https://otruyenapi.com/v1/api/'
