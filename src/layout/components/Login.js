@@ -38,7 +38,7 @@ function Login() {
     }
 
     return (
-        <button onClick={handleLogin} className="bg-[#10b981] text-sm px-[16px] py-[8px] rounded-full text-[#fff] transition-all hover:opacity-[.8] font-[500]">Đăng nhập</button>
+        <button onClick={handleLogin} className="bg-[#10b981] text-sm px-[16px] py-[8px] rounded-[8px] text-[#fff] transition-all hover:opacity-[.8] font-[500]">Đăng nhập</button>
     );
 }
 

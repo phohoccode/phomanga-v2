@@ -9,7 +9,7 @@ function DefaultLayout({ children }) {
     return (
         <div className="">
             <NavBar />
-            <div className="flex mt-[24px] pl-[16px] pr-[32px] gap-[32px]">
+            <div className="flex mt-[24px] mobile:mt-[16px] pl-[16px] pr-[32px] mobile:pr-[16px] gap-[32px]">
                 {width > 1024 && <SideBar />}
                 <div className="flex-1">
                     {children}

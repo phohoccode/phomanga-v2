@@ -6,10 +6,20 @@ module.exports = {
     theme: {
         extend: {
             spacing: {
-                'desktop': 'calc(100% - (128px + 180px + 32px))'
+                'desktop': 'calc(100% - (128px + 180px + 32px))',
+                'mobile': 'calc(100% - 32px)'
+            },
+            screens: {
+                'mobile': '320px'
             },
             boxShadow: {
                 'custom': '0 -4px 32px #0003'
+            },
+            backdropBlur: {
+                's': '4px'
+            },
+            backgroundImage: {
+                'image-inherit': 'inherit'
             },
             keyframes: {
                 slideIn: {
@@ -39,6 +49,10 @@ module.exports = {
                 heightIn: {
                     '0%': { height: '0' },
                     '100%': { height: '50vh' }
+                },
+                blurFilter: {
+                    '0%': { backdropFilter: 'blur(0)' },
+                    '100%': { backdropFilter: 'blur(4px)' }
                 }
             },
             animation: {
@@ -48,7 +62,8 @@ module.exports = {
                 'fade-out': 'faseOut 0.5s ease',
                 'scale-in': 'scaleIn 0.5s ease',
                 'scale-out': 'scaleOut 0.5s ease',
-                'height-in': 'heightIn 0.2s ease'
+                'height-in': 'heightIn 0.2s ease',
+                'blurFilter-in': 'blurFilter .3s ease'
             },
         },
     },

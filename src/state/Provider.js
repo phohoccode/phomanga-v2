@@ -12,7 +12,9 @@ function Provider({ children }) {
         return user ? user : null
     })
     const [width, setWidth] = useState(window.innerWidth)
-    const [isShowCategory, setIsShowCategory] = useState(false)
+    const [theme, setTheme] = useState(() => {
+        return JSON.parse(localStorage.getItem('theme')) || 'light'
+    })
 
     useEffect(() => {
         const handleReSize = () => {
@@ -21,6 +23,10 @@ function Provider({ children }) {
         window.addEventListener('resize', handleReSize)
         return () => document.removeEventListener('resize', handleReSize)
     }, [])
+
+    useEffect(() => {
+        localStorage.setItem('theme', JSON.stringify(theme))
+    }, [theme])
 
     const handleLogout = () => {
         googleLogout()
@@ -33,11 +39,11 @@ function Provider({ children }) {
         isLogin,
         user,
         width,
-        isShowCategory,
+        theme,
         setUser,
         setIsLogin,
         handleLogout,
-        setIsShowCategory
+        setTheme
     }
 
     return (

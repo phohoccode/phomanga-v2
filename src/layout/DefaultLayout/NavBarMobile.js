@@ -1,13 +1,11 @@
-import { NavLink, useLocation } from "react-router-dom";
-import { useEffect, useRef, useState, useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
 import Category from "../components/Category";
 import Context from "../../state/Context";
-import useFetch from "../../hooks/UseFetch";
-import { category } from "../../api";
 
-function NavBarMobile({ setIsShowNavBarMobile }) {
-    const [data] = useFetch(category)
-    const { isShowCategory, setIsShowCategory } = useContext(Context)
+function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) {
+    const { theme, setTheme } = useContext(Context)
+    const [isShowCategory, setIsShowCategory] = useState(false)
     const [valueSearch, setValueSearch] = useState('')
     const containerRef = useRef()
     const modalRef = useRef()
@@ -28,44 +26,62 @@ function NavBarMobile({ setIsShowNavBarMobile }) {
         }
     };
 
+    const handleSearch = (e, valueSearch) => {
+        handleKeyDownSearch(e, valueSearch)
+        if (e.key === 'Enter') {
+            handleCloseModal()
+        }
+    }
+
+    const handleSetTheme = () => {
+        setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
+        handleCloseModal()
+    }
+
     return (
         <div
             ref={containerRef}
             onClick={handleWrapperClick}
             className="fixed inset-0 bg-[#0000004d] min-h-[100%] animate-fade-in">
             <div ref={modalRef} className="p-[16px] relative w-[80%] bg-[#fff] h-full left-0 overflow-y-auto overscroll-y-none animate-slide-in">
-                <button
-                    onClick={handleCloseModal}
-                    className="flex ml-auto text-[30px] p-[16px] mt-[-16px] mr-[-16px]">
-                    <i className="fa-solid fa-xmark"></i>
-                </button>
-                <div className="h-[40px] flex items-center px-[8px] py-[4px] border-2 border-solid border-[#ccc] rounded-[8px] transition-all w-full focus-within:border-[#10b981] mt-[12px]">
+                <div className="flex p-[16px] items-center justify-between absolute top-0 left-0 right-0">
+                    <button
+                        onClick={handleCloseModal}
+                        className="text-[30px]">
+                        <i className="fa-solid fa-xmark"></i>
+                    </button >
+                    <div onClick={handleSetTheme} className="w-[30px] h-[30px] cursor-pointer">
+                        <i className="text-[30px] fa-solid fa-circle-half-stroke"></i>
+                    </div>
+                </div>
+                <div className="h-[40px] flex items-center px-[8px] py-[4px] border-2 border-solid border-[#ccc] rounded-[8px] transition-all w-full focus-within:border-[#10b981] mt-[64px]">
                     <input
                         value={valueSearch}
                         onChange={e => setValueSearch(e.target.value)}
+                        onKeyDown={(e) => handleSearch(e, valueSearch)}
                         className="outline-none w-full ml-[12px] bg-[#fff] color-[#000]"
                         placeholder="Tìm kiếm..."
                     />
-                    <NavLink className='px-[8px] transition-all hover:color-[#10b981]' to='/search'>
+                    <NavLink className='px-[8px] transition-all hover:color-[#10b981]' to={`/search/${valueSearch}`}>
                         <i className="text-inherit fa-solid fa-magnifying-glass"></i>
                     </NavLink>
                 </div>
                 <ul className="mt-[12px]">
                     <li onClick={handleCloseModal}>
-                        <NavLink to='/' className='block hover:text-[#10b981] transition-all py-[8px]'>Trang chủ</NavLink>
+                        <NavLink to='/' className='block text-lg hover:text-[#10b981] transition-all py-[8px]'>Trang chủ</NavLink>
                     </li>
                     <li onClick={handleCloseModal}>
-                        <NavLink to='/archive' className='block hover:text-[#10b981] transition-all py-[8px]'>Kho lưu trữ</NavLink>
+                        <NavLink to='/archive' className='block text-lg hover:text-[#10b981] transition-all py-[8px]'>Kho lưu trữ</NavLink>
                     </li>
                     <li onClick={handleCloseModal}>
-                        <NavLink to='history' className='block hover:text-[#10b981] transition-all py-[8px]' >Lịch sử đã xem</NavLink>
+                        <NavLink to='history' className='block text-lg hover:text-[#10b981] transition-all py-[8px]' >Lịch sử đã xem</NavLink>
                     </li>
                     <li>
-                        <div onClick={() => setIsShowCategory(!isShowCategory)} className="flex items-center gap-[8px] py-[8px]">
+                        <div onClick={() => setIsShowCategory(!isShowCategory)} className="flex items-center text-lg gap-[8px] py-[8px]">
                             <span>Thể loại</span>
                             <i className="fa-solid fa-angle-right"></i>
                         </div>
-                        {isShowCategory && <Category data={data && data}/>}
+                        {isShowCategory && <Category data={category} />}
                     </li>
                 </ul>
             </div>
