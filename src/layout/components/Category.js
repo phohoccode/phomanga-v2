@@ -31,7 +31,7 @@ function Category({ data, setIsShowCategory }) {
                 className="fixed inset-0 bg-[#0000004d] z-[999] backdrop-blur-[4px]">
                 <div ref={modalRef} className="absolute bg-[#fff] shadow-custom top-[50%] translate-y-[-50%] translate-x-[-50%] left-[50%] rounded-[16px] min-w-[60%] p-[16px] h-auto">
                     <div className="flex justify-between items-center mb-[12px]">
-                        <h4 className="text-3xl">Thể loại</h4>
+                        <h4 className="text-3xl font-[600]">Thể loại</h4>
                         <button onClick={handleCloseModal}>
                             <i className="text-[30px] fa-solid fa-xmark"></i>
                         </button>

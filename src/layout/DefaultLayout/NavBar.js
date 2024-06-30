@@ -43,10 +43,14 @@ function NavBar() {
                         value={valueSearch}
                         onChange={e => setValueSearch(e.target.value)}
                         onKeyDown={(event) => handleKeyDownSearch(event, valueSearch)}
-                        className="outline-none w-full ml-[12px] bg-[#fff] color-[#000] font-[900]"
+                        className="outline-none w-full ml-[12px] bg-[#fff] color-[#000] font-[600]"
                         placeholder="Tìm kiếm..."
                     />
-                    <NavLink className='px-[8px] transition-all hover:color-[#10b981]' to={`/search/${valueSearch}`}>
+                    {valueSearch.length > 0 &&
+                        <button onClick={() => setValueSearch("")}>
+                            <i className="fa-solid fa-xmark p-[8px]"></i>
+                        </button>}
+                    <NavLink className='px-[8px] transition-all hover:text-[#10b981]' to={`/search/${valueSearch}`}>
                         <i className="text-inherit fa-solid fa-magnifying-glass"></i>
                     </NavLink>
                 </div>}

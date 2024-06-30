@@ -125,9 +125,7 @@ function Slides({ api }) {
                 </div>}
             <ul className="flex gap-[12px] absolute bottom-[-30px] left-0">
                 {slides.slice(0, 10).map((_, index) => (
-                    <li onClick={() => setCurrentIndex(index)} className={classNames("flex gap-[12px] 2xl:w-[32px] w-[18px] h-[8px] rounded-[8px] bg-[#dce0e3] transition-all duration-700 cursor-pointer", {
-                        '2xl:w-[50px] w-[24px] bg-[#9aa6af]': index === currentIndex
-                    })} key={index}></li>
+                    <li onClick={() => setCurrentIndex(index)} className={`flex gap-[12px] 2xl:w-[32px] w-[18px] h-[8px] rounded-[8px] transition-all duration-300 cursor-pointer ${index === currentIndex ? '2xl:w-[50px] mobile:w-[32px] bg-[#9aa6af]' : '2xl:w-[32px] mobile:w-[18px] bg-[#dce0e3]'} `} key={index}></li>
                 ))}
             </ul>
         </div >

@@ -2,6 +2,7 @@
 module.exports = {
     content: [
         "./src/**/*.{js,jsx,ts,tsx}",
+        './src/assets/index.css'
     ],
     theme: {
         extend: {
@@ -13,7 +14,8 @@ module.exports = {
                 'mobile': '320px'
             },
             boxShadow: {
-                'custom': '0 -4px 32px #0003'
+                'custom': '0 -4px 32px #0003',
+                'comic': '0 4px 8px #0000001a'
             },
             backdropBlur: {
                 's': '4px'
@@ -53,7 +55,16 @@ module.exports = {
                 blurFilter: {
                     '0%': { backdropFilter: 'blur(0)' },
                     '100%': { backdropFilter: 'blur(4px)' }
+                },
+                topToBottom: {
+                    '0%': { transform: 'translateY(-200%)' },
+                    '100%': { transform: 'translateX(0)' },
+                },
+                bottomToTop: {
+                    '0%': { transform: 'translateY(200%)' },
+                    '100%': { transform: 'translateX(0)' },
                 }
+                
             },
             animation: {
                 'slide-in': 'slideIn 0.5s ease',
@@ -63,7 +74,9 @@ module.exports = {
                 'scale-in': 'scaleIn 0.5s ease',
                 'scale-out': 'scaleOut 0.5s ease',
                 'height-in': 'heightIn 0.2s ease',
-                'blurFilter-in': 'blurFilter .3s ease'
+                'blurFilter-in': 'blurFilter .3s ease',
+                'top-to-bottom': 'topToBottom ease .5s',
+                'bottom-to-top': 'bottomToTop ease .5s'
             },
         },
     },

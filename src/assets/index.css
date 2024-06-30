@@ -3,8 +3,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .custom-clamp {
+    @apply text-inherit text-base mt-2 overflow-hidden text-ellipsis transition duration-300;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .text-shadow {
+    text-shadow: 2px 2px rgba(0,0,0,.502);
+  }
+}
+
 body {
-    font-family: "Quicksand", sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 img {

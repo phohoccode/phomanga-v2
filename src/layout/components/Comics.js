@@ -17,14 +17,15 @@ function Comics({ api }) {
         <div className="mt-[64px]">
             {data &&
                 <div className="flex justify-between items-center mb-[24px]">
-                    <h4 className="lg:text-3xl font-[900] mobile:text-xl">
+                    <h4 className="lg:text-2xl font-[900] mobile:text-xl">
                         <i className="mr-[8px] fa-solid fa-book-open"></i>
                         {data?.data?.titlePage}
                     </h4>
                     <Link
                         to={`/detail${data?.data?.breadCrumb[0]?.slug}`}
-                        className='block lg:py-[8px] mobile:py-[4px] lg:px-[16px] mobile:px-[8px] rounded-[8px] bg-[#10b981] text-[#fff] font-[500]'>
+                        className='block text-[#10b981] font-[600] transition-all hover:underline group'>
                         Xem thêm
+                        <i className="ml-[4px] group-hover:translate-x-[2px] transition-all fa-solid fa-angle-right"></i>
                     </Link>
                 </div>}
             <div className="flex mx-[-8px] flex-wrap gap-y-[24px]">
