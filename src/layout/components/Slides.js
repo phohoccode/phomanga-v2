@@ -116,10 +116,10 @@ function Slides({ api }) {
             </div>
             {data && width > 1024 &&
                 <div className="flex absolute right-[12px] bottom-[12px] gap-[12px]">
-                    <button onClick={handlePrev} className="px-[14px] w-[40px] h-[40px] text-[#fff] text-xl rounded-[8px] bg-[#3f3f3f] transition-all hover:opacity-[.9]">
+                    <button onClick={handlePrev} className="px-[14px] w-[40px] h-[40px] text-[#fff] text-xl rounded-[8px] bg-[#3f3f3f] transition-all hover:scale-[1.05]">
                         <i className="fa-solid fa-chevron-left"></i>
                     </button>
-                    <button onClick={handleNext} className="px-[14px] w-[40px] h-[40px] text-[#fff] text-xl rounded-[8px] bg-[#3f3f3f] transition-all hover:opacity-[.9]">
+                    <button onClick={handleNext} className="px-[14px] w-[40px] h-[40px] text-[#fff] text-xl rounded-[8px] bg-[#3f3f3f] transition-all hover:scale-[1.05]">
                         <i className="fa-solid fa-chevron-right"></i>
                     </button>
                 </div>}

@@ -7,7 +7,7 @@ function DefaultLayout({ children }) {
     const { width } = useContext(Context)
 
     return (
-        <div className="">
+        <div>
             <NavBar />
             <div className="flex mt-[24px] mobile:mt-[16px] pl-[16px] pr-[32px] mobile:pr-[16px] gap-[32px]">
                 {width > 1024 && <SideBar />}

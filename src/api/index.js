@@ -6,3 +6,4 @@ export const completed = 'https://otruyenapi.com/v1/api/danh-sach/hoan-thanh?pag
 export const category = 'https://otruyenapi.com/v1/api/the-loai'
 export const search = 'https://otruyenapi.com/v1/api/tim-kiem?keyword='
 export const detail = 'https://otruyenapi.com/v1/api/'
+export const comic = 'https://otruyenapi.com/v1/api/truyen-tranh'

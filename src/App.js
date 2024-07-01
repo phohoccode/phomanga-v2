@@ -8,7 +8,6 @@ function App() {
         <Routes>
             {publicRoutes.map((route, index) => {
                 const Page = route.component
-
                 return (
                     <Route
                         key={index}

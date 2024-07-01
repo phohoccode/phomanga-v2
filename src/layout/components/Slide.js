@@ -24,7 +24,7 @@ function Slide({ data }) {
                             alt={data?.chaptersLatest?.[0]?.chapter_name} />
                     </figure>}
                 <div className="lg:w-desktop w-mobile mobile:mt-[16px]">
-                    <h4 className="animate-top-to-bottom lg:text-3xl mobile:text-lg font-[600] text-[#fff] text-shadow">
+                    <h4 className="lg:text-3xl mobile:text-lg font-[600] text-[#fff] text-shadow">
                         {data?.chaptersLatest ?
                             `Chương ${data?.chaptersLatest?.[0]?.chapter_name}` :
                             'Truyện đang gặp lỗi!'
@@ -41,13 +41,13 @@ function Slide({ data }) {
                     {data?.chaptersLatest &&
                         <div className="flex gap-[12px] mt-[16px]">
                             <Link
-                                className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:opacity-[0.8] bg-[#10b981]"
+                                className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981]"
                                 to={`/read/${data?.slug}/${chapterApi}`}
                             >
                                 <i className="mr-[8px] fa-regular fa-eye"></i>
                                 Đọc ngay
                             </Link>
-                            <Link className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:opacity-[0.8] bg-[#fff] text-[#000]" to={`/info/${data?.slug}`}>
+                            <Link className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all bg-[#fff] hover:scale-[1.05] text-[#000]" to={`/info/${data?.slug}`}>
                                 <i className="mr-[8px] fa-solid fa-circle-info"></i>
                                 Chi tiết
                             </Link>

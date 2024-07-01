@@ -18,7 +18,7 @@ function User() {
                     <div
                         onClick={() => setIsShowUser(false)}
                         className="absolute right-[8px] top-0 p-[8px] cursor-pointer">
-                        <i class="fa-solid fa-xmark"></i>
+                        <i className="fa-solid fa-xmark"></i>
                     </div>
                     <div className="flex items-center gap-[12px]">
                         <figure className="w-[50px] h-[50px] rounded-full overflow-hidden flex-shrink-0">

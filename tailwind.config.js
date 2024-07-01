@@ -8,7 +8,9 @@ module.exports = {
         extend: {
             spacing: {
                 'desktop': 'calc(100% - (128px + 180px + 32px))',
-                'mobile': 'calc(100% - 32px)'
+                'mobile': 'calc(100% - 32px)',
+                'chapter-desktop': 'calc(10% - 11px)',
+                'chapter-mobile': 'calc(33.33333% - 8px)'
             },
             screens: {
                 'mobile': '320px'
