@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Context from "./Context";
 import { googleLogout } from "@react-oauth/google";
+import storage from '../utils'
 
 function Provider({ children }) {
     const [isLogin, setIsLogin] = useState(() => {
@@ -14,6 +15,14 @@ function Provider({ children }) {
     const [width, setWidth] = useState(window.innerWidth)
     const [theme, setTheme] = useState(() => {
         return JSON.parse(localStorage.getItem('theme')) || 'light'
+    })
+    const [isOpenDiaLog, setIsOpenDiaLog] = useState(false)
+    const [quantityComicArchive, setQuantityComicArchive] = useState(() => {
+        return storage.get('comic-storage', []).length
+    })
+    const [quantityComicHistory, setQuantityComicHistory] = useState(() => {
+        const historyStorage = storage.get('history-storage', {})
+        return Object.keys(historyStorage).length
     })
 
     useEffect(() => {
@@ -33,6 +42,7 @@ function Provider({ children }) {
         setUser(null)
         localStorage.removeItem('user')
         setIsLogin(false)
+
     }
 
     const value = {
@@ -40,10 +50,16 @@ function Provider({ children }) {
         user,
         width,
         theme,
+        isOpenDiaLog,
+        quantityComicArchive,
+        quantityComicHistory,
         setUser,
         setIsLogin,
         handleLogout,
-        setTheme
+        setTheme,
+        setIsOpenDiaLog,
+        setQuantityComicArchive,
+        setQuantityComicHistory
     }
 
     return (

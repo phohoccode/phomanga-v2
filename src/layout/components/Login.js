@@ -1,6 +1,7 @@
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import { useContext, useEffect, useState } from 'react';
 import Context from '../../state/Context';
+import toast from 'react-hot-toast';
 
 function Login() {
     const { setIsLogin, setUser } = useContext(Context)
@@ -32,6 +33,7 @@ function Login() {
             setIsLogin(true)
             console.log(userInfo);
             localStorage.setItem('user', JSON.stringify(userInfo))
+            toast.success(`Xin chào! ${userInfo?.name}`, { duration: 1500 })
         } catch (error) {
             console.log(error);
         }

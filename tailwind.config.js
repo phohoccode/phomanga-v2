@@ -69,16 +69,16 @@ module.exports = {
                 
             },
             animation: {
-                'slide-in': 'slideIn 0.5s ease',
-                'slide-out': 'slideOut 0.5s ease',
-                'fade-in': 'faseIn 0.5s ease',
-                'fade-out': 'faseOut 0.5s ease',
-                'scale-in': 'scaleIn 0.5s ease',
-                'scale-out': 'scaleOut 0.5s ease',
-                'height-in': 'heightIn 0.2s ease',
+                'slide-in': 'slideIn 0.3s ease',
+                'slide-out': 'slideOut 0.3s ease',
+                'fade-in': 'faseIn 0.3s ease',
+                'fade-out': 'faseOut 0.3s ease',
+                'scale-in': 'scaleIn 0.3s ease',
+                'scale-out': 'scaleOut 0.3s ease',
+                'height-in': 'heightIn 0.3s ease',
                 'blurFilter-in': 'blurFilter .3s ease',
-                'top-to-bottom': 'topToBottom ease .5s',
-                'bottom-to-top': 'bottomToTop ease .5s'
+                'top-to-bottom': 'topToBottom ease .3s',
+                'bottom-to-top': 'bottomToTop ease .3s'
             },
         },
     },

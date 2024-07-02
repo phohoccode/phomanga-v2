@@ -1,12 +1,16 @@
 import useFetch from "../hooks/UseFetch";
 import { useParams } from "react-router-dom";
 import { comic } from "../api";
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment, useContext } from "react";
 import storage, { formatDate, setScrollAuto, setScrollHidden } from '../utils'
 import { Link } from "react-router-dom";
 import ComicsSuggestions from "../layout/components/ComicsSuggestions";
+import toast from "react-hot-toast";
+import DiaLog from "../layout/components/Dialog";
+import Context from "../state/Context";
 
 function Info() {
+    const { width, isOpenDiaLog, setIsOpenDiaLog, setQuantityComicArchive } = useContext(Context)
     const params = useParams()
     const [data] = useFetch(`${comic}/${params.slug}`)
     const [valueSearchChapter, setValueSearchChapter] = useState('')
@@ -86,8 +90,8 @@ function Info() {
         const newComicStorage = [...comicStorage, data?.data?.item]
         storage.set('comic-storage', newComicStorage)
         setIsSave(!isSave)
-        // width > 1023 && setQuantityComic(newComicStorage.length)
-        // toast.success('Lưu truyện thành công!')
+        width > 1023 && setQuantityComicArchive(newComicStorage.length)
+        toast.success('Lưu truyện thành công!', { duration: 1000 })
     }
 
     const handleDeleteComic = () => {
@@ -95,9 +99,10 @@ function Info() {
         const newComic = comicStorage.filter(
             comic => comic?.slug !== params.slug)
         storage.set('comic-storage', newComic)
-        // width > 1023 && setQuantityComic(newComic.length)
+        width > 1023 && setQuantityComicArchive(newComic.length)
         setIsSave(!isSave)
-        // toast.success('Xoá truyện thành công!')
+        toast.success('Xoá truyện thành công!', { duration: 1000 })
+        setIsOpenDiaLog(true)
     }
 
     const handleSortComic = () => {
@@ -107,17 +112,17 @@ function Info() {
         setChapters(
             !isCollapse ? chapters.reverse() : chapters.reverse().slice(0, 39))
         setValueSearchChapter('')
-        // isSort ?
-        //     toast('Chương được sắp xếp tăng dần', { duration: 2000 }) :
-        //     toast('Chương được sắp xếp giảm dần', { duration: 2000 })
+        isSort ?
+            toast('Chương được sắp xếp tăng dần', { duration: 2000 }) :
+            toast('Chương được sắp xếp giảm dần', { duration: 2000 })
     }
 
     return (
-        <div className=''>
+        <Fragment>
             {!data && <h4 className='text-2xl font-[600]'>Đang tải dữ liệu...</h4>}
             {data &&
                 <Fragment>
-                    <div className='2xl:flex 2xl:flex-row mobile:flex-col mobile:gap-[12px] p-[16px] bg-[rgba(16,185,129,0.15)] rounded-[16px]'>
+                    <div className='2xl:flex 2xl:flex-row mobile:flex-col mobile:gap-[12px] p-[16px] bg-[rgba(16,185,129,0.15)] rounded-[8px]'>
                         <figure className="flex-shrink-0 2xl:w-[200px] mobile:w-full 2xl:h-[300px] mobile:h-auto overflow-hidden rounded-[8px]">
                             <img
                                 src={`https://otruyenapi.com/uploads/comics/${infoComic?.thumb_url}`}
@@ -136,7 +141,7 @@ function Info() {
                                     </button>
                                 ) : (
                                     <button
-                                        onClick={handleDeleteComic}
+                                        onClick={() => setIsOpenDiaLog(true)}
                                         className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#d90429] text-[#fff]'
                                     >
                                         <i className="mr-[8px] fa-solid fa-trash"></i>
@@ -163,7 +168,7 @@ function Info() {
                                 <b className="text-[#10b981]">Ngày cập nhật:</b>
                                 <span className={('text')}>{formatDate(infoComic?.updatedAt)}</span>
                             </div>
-                            <ul className='flex gap-[12px] text-lg'>
+                            <ul className='flex gap-[12px] text-lg flex-wrap'>
                                 <b className="text-[#10b981]">Thể loại: </b>
                                 {category.map((category, index) => (
                                     <li key={index} className='transition-all hover:scale-[1.05]'>
@@ -278,7 +283,13 @@ function Info() {
                 </Fragment>
             }
             {data?.data && <ComicsSuggestions data={data?.data} />}
-        </div>
+            {isOpenDiaLog &&
+                <DiaLog
+                    onDeleteComic={handleDeleteComic}
+                    text='Truyện sẽ được xoá khỏi kho lưu trữ!'
+                />}
+        </Fragment>
+
     );
 }
 
