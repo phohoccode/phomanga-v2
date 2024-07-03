@@ -16,7 +16,7 @@ function Slide({ data }) {
             style={{
                 backgroundImage: `url(https://otruyenapi.com/uploads/comics/${data?.thumb_url})`,
             }}
-            className="flex-shrink-0 w-full lg:h-[320px] h-[500px] flex lg:items-center mobile:items-start bg-cover bg-repeat bg-center text-[#fff] bg-[#00000099] relative 2xl:after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:bg-image-inherit after:z-[1] after:blur-[8px] after:bg-cover after:bg-center mobile:after:content-none">
+            className="flex-shrink-0 w-full lg:h-[320px] h-[500px] flex lg:items-center mobile:items-start bg-cover bg-repeat bg-center text-[#fff] bg-[#00000099] relative lg:after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:bg-image-inherit after:z-[1] after:blur-[8px] after:bg-cover after:bg-center mobile:after:content-none">
             <div className="w-full flex gap-[32px] absolute z-[2] lg:left-[64px] left-[16px]">
                 {width > 1024 &&
                     <figure className="w-[180px] h-[250px] rounded-[8px] overflow-hidden">

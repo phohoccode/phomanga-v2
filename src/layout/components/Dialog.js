@@ -20,9 +20,9 @@ function DiaLog(props) {
 
     return (
         <div onClick={handleWrapperClick} className="fixed inset-0 flex items-center justify-center z-[9999]">
-            <div className="absolute inset-0 bg-[rgba(0,0,0,0.3)] animate-fade-in"></div>
-            <div ref={mainRef} className="bg-[#fff] rounded-[16px] max-w-[80vw] absolute z-[1] w-[600px] shadow-custom animate-scale-in">
-                <div className="flex items-center justify-between p-[16px] border-b-2 border-solid border-[rgba(0,0,0,.1)]">
+            <div className="absolute inset-0 bg-[rgba(0,0,0,0.5)] animate-fade-in"></div>
+            <div ref={mainRef} className="bg-[#fff] dark:bg-[#282828] dark:text-[#fff] rounded-[16px] max-w-[80vw] absolute z-[1] w-[600px] shadow-custom animate-scale-in">
+                <div className="flex items-center justify-between p-[16px] border-b-2 border-solid border-[rgba(0,0,0,.1)] dark:border-[rgba(255,255,255,0.1)]">
                     <h4 className="text-2xl font-[900]">Thông báo!</h4>
                     <button onClick={() => setIsOpenDiaLog(false)} className="text-2xl opacity-[.8] transition-all hover:opacity-[1]">
                         <i className="fa-solid fa-xmark"></i>

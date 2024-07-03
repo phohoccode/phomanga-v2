@@ -119,18 +119,18 @@ function Info() {
 
     return (
         <Fragment>
-            {!data && <h4 className='text-2xl font-[600]'>Đang tải dữ liệu...</h4>}
+            {!data && <h4 className='text-2xl font-[600] dark:text-[#fff]'>Đang tải dữ liệu...</h4>}
             {data &&
                 <Fragment>
-                    <div className='2xl:flex 2xl:flex-row mobile:flex-col mobile:gap-[12px] p-[16px] bg-[rgba(16,185,129,0.15)] rounded-[8px]'>
-                        <figure className="flex-shrink-0 2xl:w-[200px] mobile:w-full 2xl:h-[300px] mobile:h-auto overflow-hidden rounded-[8px]">
+                    <div className='lg:flex lg:flex-row mobile:flex-col mobile:gap-[12px] p-[16px] bg-[rgba(16,185,129,0.15)] rounded-[8px] dark:bg-[#ccc]'>
+                        <figure className="flex-shrink-0 lg:w-[200px] mobile:w-full lg:h-[300px] mobile:h-auto overflow-hidden rounded-[8px]">
                             <img
                                 src={`https://otruyenapi.com/uploads/comics/${infoComic?.thumb_url}`}
                                 alt={infoComic?.name}
                             />
                         </figure>
-                        <div className='overflow-hidden flex flex-col gap-[4px] flex-1 2xl:pl-[32px]'>
-                            <h4 className="text-3xl font-[600] 2xl:mt-0 mobile:mt-[16px]">{infoComic?.name}</h4>
+                        <div className='overflow-hidden flex flex-col gap-[4px] flex-1 lg:pl-[32px]'>
+                            <h4 className="text-3xl font-[600] lg:mt-0 mobile:mt-[16px]">{infoComic?.name}</h4>
                             <div className='flex gap-[12px] my-[12px]'>
                                 {!isSave ? (
                                     <button
@@ -189,7 +189,7 @@ function Info() {
 
                     <div className='mt-[32px]'>
                         <div className='flex items-center justify-between'>
-                            <h4 className="text-2xl font-[600]">
+                            <h4 className="text-2xl font-[600] dark:text-[#fff]">
                                 <i className="mr-[8px] fa-regular fa-rectangle-list"></i>
                                 Danh sách chương
                             </h4>
@@ -206,14 +206,14 @@ function Info() {
                                     )}
                                 </button>}
                         </div>
-                        <p className="my-[12px] font-[600]">
+                        <p className="my-[12px] font-[600] dark:text-[#fff]">
                             Gợi ý: Bạn có thể cuộn con lăn chuột để chọn chương
                         </p>
-                        <div className='flex items-center w-full px-[12px] rounded-[8px] border-2 border-solid border-[#ccc] focus-within:border-[#10b981] mt-[12px] mb-[24px]'>
+                        <div className='flex items-center w-full px-[12px] rounded-[8px] border-2 border-solid border-[#ccc] focus-within:border-[#10b981] mt-[12px] mb-[24px] dark:text-[#fff]'>
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input
                                 type="number"
-                                className="w-full h-[40px] pl-[12px] text-base outline-none font-[600]"
+                                className="w-full h-[40px] pl-[12px] text-base outline-none font-[600] bg-transparent"
                                 value={valueSearchChapter}
                                 placeholder='Nhập số chương cần tìm...'
                                 onChange={handleSearchChapter}
@@ -225,7 +225,7 @@ function Info() {
                             {chapters.length > 0 ?
                                 <Fragment>
                                     {isSort ? (
-                                        <li className="2xl:w-chapter-desktop mobile:w-chapter-mobile">
+                                        <li className="lg:w-chapter-desktop mobile:w-chapter-mobile">
                                             <Link
                                                 className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-sm transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] text-center"
                                                 to={`/read/${params.slug}/${chapters[chapters.length - 1]?.chapter_api_data
@@ -234,7 +234,7 @@ function Info() {
                                             </Link>
                                         </li>
                                     ) : (
-                                        <li className='2xl:w-chapter-desktop mobile:w-chapter-mobile'>
+                                        <li className='lg:w-chapter-desktop mobile:w-chapter-mobile'>
                                             <Link
                                                 className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-sm transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] text-center"
                                                 to={`/read/${params.slug}/${chapters[chapters.length - 1]?.chapter_api_data
@@ -245,7 +245,7 @@ function Info() {
                                     )}
                                     {chapters.map((chapter, index) => (
                                         <li
-                                            className={` transition-all hover:scale-[1.05] rounded-[8px] 2xl:w-chapter-desktop mobile:w-chapter-mobile ${idStorage.includes(chapter?.chapter_api_data.split('/').pop()) ? '#10b981b3' : 'bg-[#10b981]'}`}
+                                            className={` transition-all hover:scale-[1.05] rounded-[8px] lg:w-chapter-desktop mobile:w-chapter-mobile ${idStorage.includes(chapter?.chapter_api_data.split('/').pop()) ? 'bg-[#10b981b3]' : 'bg-[#10b981]'}`}
                                             key={index}>
                                             <Link
                                                 className="py-[4px] px-[12px] mobile:px-[8px]  block text-sm  text-[#fff] text-center"

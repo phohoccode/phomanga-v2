@@ -8,17 +8,14 @@ function Comics({ api }) {
     const [comics, setComics] = useState([])
 
     useEffect(() => {
-        if (data) {
-            console.log(data);
-            setComics(data?.data?.items || [])
-        }
+        data && setComics(data?.data?.items || [])
     }, [data])
 
     return (
         <div className="mt-[64px]">
             {data &&
                 <div className="flex justify-between items-center mb-[24px]">
-                    <h4 className="lg:text-2xl font-[900] mobile:text-xl">
+                    <h4 className="lg:text-2xl font-[900] mobile:text-xl dark:text-[#fff]">
                         <i className="mr-[8px] fa-solid fa-book-open"></i>
                         {data?.data?.titlePage}
                     </h4>

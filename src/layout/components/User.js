@@ -10,11 +10,11 @@ function User() {
         <div className="relative">
             <figure
                 onClick={() => setIsShowUser(!isShowUser)}
-                className="w-[30px] h-[30px] rounded-full overflow-hidden cursor-pointer">
+                className="w-[30px] h-[30px] rounded-full overflow-hidden cursor-pointer select-none">
                 <img src={user?.picture} act='logo' />
             </figure>
             {isShowUser &&
-                <div className="absolute z-[9999] right-0 top-[130%] shadow-custom bg-[#fff] min-w-[230px] max-w-[300px] p-[16px] rounded-[8px]">
+                <div className="absolute z-[9999] right-0 top-[130%] shadow-custom bg-[#fff] dark:bg-[#282828] dark:text-[#fff] min-w-[230px] max-w-[300px] p-[16px] rounded-[8px]">
                     <div
                         onClick={() => setIsShowUser(false)}
                         className="absolute right-[8px] top-0 p-[8px] cursor-pointer">

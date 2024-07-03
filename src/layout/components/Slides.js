@@ -1,7 +1,6 @@
 import useFetch from "../../hooks/UseFetch";
 import { useEffect, useState, useRef, useContext } from 'react'
 import Slide from "./Slide";
-import classNames from "classnames";
 import Context from "../../state/Context";
 
 function Slides({ api }) {
@@ -125,7 +124,7 @@ function Slides({ api }) {
                 </div>}
             <ul className="flex gap-[12px] absolute bottom-[-30px] left-0">
                 {slides.slice(0, 10).map((_, index) => (
-                    <li onClick={() => setCurrentIndex(index)} className={`flex gap-[12px] 2xl:w-[32px] w-[18px] h-[8px] rounded-[8px] transition-all duration-300 cursor-pointer ${index === currentIndex ? '2xl:w-[50px] mobile:w-[32px] bg-[#9aa6af]' : '2xl:w-[32px] mobile:w-[18px] bg-[#dce0e3]'} `} key={index}></li>
+                    <li onClick={() => setCurrentIndex(index)} className={`flex gap-[12px] lg:w-[32px] w-[18px] h-[8px] rounded-[8px] transition-all duration-300 cursor-pointer ${index === currentIndex ? 'lg:w-[50px] mobile:w-[32px] bg-[#9aa6af]' : 'lg:w-[32px] mobile:w-[18px] bg-[#dce0e3]'} `} key={index}></li>
                 ))}
             </ul>
         </div >

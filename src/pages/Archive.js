@@ -21,12 +21,6 @@ function Archive() {
         setScrollDocument(isOpenDiaLog)
     }, [isOpenDiaLog])
 
-    useEffect(() => {
-        isOpenDiaLog ?
-            document.body.style.overflowY = 'hidden' :
-            document.body.style.overflowY = 'auto'
-    }, [isOpenDiaLog])
-
     const handleDeleteAll = () => {
         setComics([])
         setQuantityComicArchive(0)
@@ -38,7 +32,7 @@ function Archive() {
         <Fragment>
             <div className=''>
                 <div className='flex items-center justify-between mb-[24px]'>
-                    <h4 className="text-2xl font-[600]">
+                    <h4 className="text-2xl font-[600] dark:text-[#fff]">
                         <i className="mr-[8px] fa-regular fa-bookmark"></i>
                         {comics.length > 0 ?
                             `Kho lưu trữ (${comics.length})` :

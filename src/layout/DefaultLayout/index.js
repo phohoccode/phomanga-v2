@@ -1,6 +1,6 @@
 import SideBar from "./SideBar";
 import NavBar from "./NavBar";
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import Context from "../../state/Context";
 import { useParams } from "react-router-dom";
 import { scrollToTop } from "../../utils";
@@ -18,7 +18,7 @@ function DefaultLayout({ children }) {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY >= 2000) {
+            if (window.scrollY >= 1000) {
                 setIsShowButtonScroll(true)
             } else {
                 setIsShowButtonScroll(false)
@@ -29,9 +29,9 @@ function DefaultLayout({ children }) {
     }, [])
 
     return (
-        <div>
+        <div className="bg-[#fff] dark:bg-[#282828] min-h-[100vh]">
             <NavBar />
-            <div className="flex mt-[24px] mobile:mt-[16px] pl-[16px] pr-[32px] mobile:pr-[16px] gap-[32px]">
+            <div className="flex mt-[32px] mobile:mt-[16px] pl-[16px] pr-[32px] mobile:pr-[16px] gap-[32px]">
                 {width > 1024 && <SideBar />}
                 <div className="flex-1">
                     {children}
@@ -44,7 +44,7 @@ function DefaultLayout({ children }) {
                     reverseOrder={true}
                     toastOptions={{
                         className: '',
-                        duration: 5000,
+                        duration: 2000,
                         style: {
                             background: '#363636',
                             color: '#fff',
@@ -55,7 +55,7 @@ function DefaultLayout({ children }) {
             {isShowButtonScroll &&
                 <div
                     onClick={scrollToTop} 
-                    className='w-[40px] flex items-center justify-center h-[40px] rounded-[8px] bg-[#10b981] fixed bottom-[32px] left-[32px] text-[#fff] animate-fade-in cursor-pointer'>
+                    className='w-[40px] flex items-center justify-center h-[40px] rounded-[8px] bg-[#10b981] fixed lg:bottom-[32px] lg:left-[32px] mobile:bottom-[16px] mobile:left-[16px] text-[#fff] animate-fade-in cursor-pointer hover:opacity-[.8] duration-300'>
                     <i className="fa-solid fa-arrow-up"></i>
                 </div>
             }

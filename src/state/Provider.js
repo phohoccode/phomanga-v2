@@ -4,19 +4,18 @@ import { googleLogout } from "@react-oauth/google";
 import storage from '../utils'
 
 function Provider({ children }) {
+    const [width, setWidth] = useState(window.innerWidth)
+    const [isOpenDiaLog, setIsOpenDiaLog] = useState(false)
     const [isLogin, setIsLogin] = useState(() => {
-        const isLogin = JSON.parse(localStorage.getItem('user'))
-        return isLogin ? true : false
+        const isLogin = storage.get('user', false)
+        return !!isLogin
     })
     const [user, setUser] = useState(() => {
-        const user = JSON.parse(localStorage.getItem('user'))
-        return user ? user : null
+        return storage.get('user', null)
     })
-    const [width, setWidth] = useState(window.innerWidth)
     const [theme, setTheme] = useState(() => {
-        return JSON.parse(localStorage.getItem('theme')) || 'light'
+        return storage.get('theme', 'light')
     })
-    const [isOpenDiaLog, setIsOpenDiaLog] = useState(false)
     const [quantityComicArchive, setQuantityComicArchive] = useState(() => {
         return storage.get('comic-storage', []).length
     })
@@ -34,15 +33,18 @@ function Provider({ children }) {
     }, [])
 
     useEffect(() => {
-        localStorage.setItem('theme', JSON.stringify(theme))
+        storage.set('theme', theme)
+        document.documentElement.classList.remove('light', 'dark')
+        theme === 'light' ? 
+            document.documentElement.classList.toggle('light') :
+            document.documentElement.classList.toggle('dark')
     }, [theme])
 
     const handleLogout = () => {
         googleLogout()
         setUser(null)
-        localStorage.removeItem('user')
         setIsLogin(false)
-
+        localStorage.removeItem('user')
     }
 
     const value = {

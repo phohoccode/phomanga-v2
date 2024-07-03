@@ -1,10 +1,11 @@
-import { NavLink } from "react-router-dom";
-import { useContext, useRef, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
 import Category from "../components/Category";
 import Context from "../../state/Context";
 
 function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) {
-    const { theme, setTheme } = useContext(Context)
+    const { setTheme } = useContext(Context)
+    const { pathname } = useLocation()
     const [isShowCategory, setIsShowCategory] = useState(false)
     const [valueSearch, setValueSearch] = useState('')
     const containerRef = useRef()
@@ -16,7 +17,7 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
             containerRef.current.classList.add('animate-fade-out')
             setTimeout(() => {
                 setIsShowNavBarMobile(false)
-            }, 400)
+            }, 200)
         }
     }
 
@@ -43,7 +44,7 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
             ref={containerRef}
             onClick={handleWrapperClick}
             className="fixed inset-0 bg-[#0000004d] min-h-[100%] animate-fade-in">
-            <div ref={modalRef} className="p-[16px] relative w-[80%] bg-[#fff] h-full left-0 overflow-y-auto overscroll-y-none animate-slide-in">
+            <div ref={modalRef} className="p-[16px] relative w-[80%] bg-[#fff] dark:bg-[#282828] dark:text-[#fff] h-full left-0 overflow-y-auto overscroll-y-none animate-slide-in">
                 <div className="flex p-[16px] items-center justify-between absolute top-0 left-0 right-0">
                     <button
                         onClick={handleCloseModal}
@@ -59,29 +60,33 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
                         value={valueSearch}
                         onChange={e => setValueSearch(e.target.value)}
                         onKeyDown={(e) => handleSearch(e, valueSearch)}
-                        className="outline-none w-full ml-[12px] bg-[#fff] color-[#000]"
+                        className="outline-none w-full ml-[12px] bg-[#fff] color-[#000] bg-transparent"
                         placeholder="Tìm kiếm..."
                     />
-                    <NavLink className='px-[8px] transition-all hover:color-[#10b981]' to={`/search/${valueSearch}`}>
+                    <NavLink className={`px-[8px] transition-all hover:color-[#10b981] ${valueSearch !== '' ? 'pointer-events-auto' : 'pointer-events-none'}`} to={`/search/${valueSearch}`}>
                         <i className="text-inherit fa-solid fa-magnifying-glass"></i>
                     </NavLink>
                 </div>
                 <ul className="mt-[12px]">
                     <li onClick={handleCloseModal}>
-                        <NavLink to='/' className='block text-lg hover:text-[#10b981] transition-all py-[8px]'>Trang chủ</NavLink>
+                        <NavLink to='/' className={`block text-lg hover:text-[#10b981] transition-all py-[8px] ${pathname === '/' ? 'text-[#10b981] font-[900]' : 'text-[#000] dark:text-[#fff]'}`}>Trang chủ</NavLink>
                     </li>
                     <li onClick={handleCloseModal}>
-                        <NavLink to='/archive' className='block text-lg hover:text-[#10b981] transition-all py-[8px]'>Kho lưu trữ</NavLink>
+                        <NavLink to='/archive' className={`block text-lg hover:text-[#10b981] transition-all py-[8px] ${pathname === '/archive' ? 'text-[#10b981] font-[900]' : 'text-[#000] dark:text-[#fff]'}`}>Kho lưu trữ</NavLink>
                     </li>
                     <li onClick={handleCloseModal}>
-                        <NavLink to='history' className='block text-lg hover:text-[#10b981] transition-all py-[8px]' >Lịch sử đã xem</NavLink>
+                        <NavLink to='history' className={`block text-lg hover:text-[#10b981] transition-all py-[8px] ${pathname === '/history' ? 'text-[#10b981] font-[900]' : 'text-[#000] dark:text-[#fff]'}`} >Lịch sử đã xem</NavLink>
                     </li>
                     <li>
                         <div onClick={() => setIsShowCategory(!isShowCategory)} className="flex items-center text-lg gap-[8px] py-[8px]">
                             <span>Thể loại</span>
                             <i className="fa-solid fa-angle-right"></i>
                         </div>
-                        {isShowCategory && <Category data={category} />}
+                        {isShowCategory &&
+                            <Category
+                                data={category}
+                                onCloseModalMobile={handleCloseModal}
+                            />}
                     </li>
                 </ul>
             </div>

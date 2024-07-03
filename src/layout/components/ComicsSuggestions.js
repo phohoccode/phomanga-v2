@@ -20,16 +20,16 @@ function ComicsSuggestions({ data }) {
     }
 
     return (
-        <div className='mt-[32px]'>
-            <div className='flex justify-between items-center mb-[-32px]'>
-                <h4 className="flex-shrink-0 text-2xl font-[600]">
-                    <i className="mr-[8px] fa-solid fa-wand-magic-sparkles"></i>
-                    Gợi ý truyện
+        <div className='mt-[48px]'>
+            <div className='flex justify-between items-center mb-[-32px] flex-col'>
+                <h4 className="flex-shrink-0 text-3xl font-[900] mobile:mb-[24px] dark:text-[#fff]">
+                    <i className="text-2xl mr-[8px] fa-solid fa-wand-magic-sparkles"></i>
+                    Gợi ý dành cho bạn
                 </h4>
                 <ul className='flex items-center gap-[12px] flex-wrap'>
                     {categorys.map((category, index) => (
                         <li
-                            className={`flex-auto py-[2px] px-[6px] mobile:px-[8px] rounded-[8px] block text-lg transition-all text-[#fff] text-center ${currentIndex === index ? 'bg-[#3b82f6] cursor-default' : 'bg-[#3b83f688] cursor-pointer hover:scale-[1.05]'} `}
+                            className={`flex-auto py-[2px] px-[6px] mobile:px-[8px] rounded-[8px] block text-lg transition-all text-[#fff] select-none text-center ${currentIndex === index ? 'bg-[#3b82f6] cursor-default' : 'bg-[rgba(59,131,246,0.6)] cursor-pointer hover:scale-[1.05]'} `}
                             onClick={() => handleSetApi(category?.slug, index)}
                             key={index}>{category?.name}</li>
                     ))}

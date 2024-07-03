@@ -26,7 +26,7 @@ function useFetch(url) {
                 setData(data)
             } catch (error) {
                 console.error(error)
-                // handleFetchToError()
+                handleFetchToError()
             }
         }
         fetchData()

@@ -15,7 +15,7 @@ function User() {
                     <figure className='rounded-full overflow-hidden 2xl:w-[172px] 2xl:h-[172px] mobile:w-[128px] h-[128px] bg-[#fff] flex items-center justify-center'>
                         <img src={user?.picture} alt={user?.name} />
                     </figure>
-                    <h4 className='text-2xl font-[900] mb-[24px]'>{user?.name}</h4>
+                    <h4 className='text-2xl font-[900] mb-[24px] dark:text-[#fff]'>{user?.name}</h4>
                 </div>
             </div>
         </div>

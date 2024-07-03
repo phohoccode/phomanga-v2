@@ -30,9 +30,17 @@ module.exports = {
                     '0%': { transform: 'translateX(-100%)' },
                     '100%': { transform: 'translateX(0)' },
                 },
+                fromRightIn: {
+                    '0%': { transform: 'translateX(100%)' },
+                    '100%': { transform: 'translateX(0)' },
+                },
                 slideOut: {
                     '0%': { transform: 'translateX(0)' },
                     '100%': { transform: 'translateX(-100%)' },
+                },
+                fromRightOut: {
+                    '0%': { transform: 'translateX(0)' },
+                    '100%': { transform: 'translateX(100%)' },
                 },
                 faseIn: {
                     '0%': { opacity: '0' },
@@ -71,6 +79,8 @@ module.exports = {
             animation: {
                 'slide-in': 'slideIn 0.3s ease',
                 'slide-out': 'slideOut 0.3s ease',
+                'from-rigth-in': 'fromRightIn 0.3s ease',
+                'from-rigth-out': 'fromRightOut 0.3s ease',
                 'fade-in': 'faseIn 0.3s ease',
                 'fade-out': 'faseOut 0.3s ease',
                 'scale-in': 'scaleIn 0.3s ease',
