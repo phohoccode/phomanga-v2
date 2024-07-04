@@ -15,7 +15,7 @@ export function formatDate(isoString) {
 export function formatTime(time) {
     const currentTime = new Date()
     const storageTime = new Date(time)
-    const diff = Math.floor((currentTime - storageTime) / 1000) 
+    const diff = Math.floor((currentTime - storageTime) / 1000)
 
     if (diff < 60) {
         return `Vừa xong`;
@@ -30,7 +30,7 @@ export function formatTime(time) {
         const month = storageTime.getMonth() + 1;
         const year = storageTime.getFullYear();
         return `${day}/${month}/${year}`;
-    }    
+    }
 }
 
 // hàm này dùng để điều chỉnh con trỏ phía cuối nội dung
@@ -46,16 +46,21 @@ export function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
+export function scrollToBottom() {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+}
+
+
 export function isUrlWithValidDomainSuffix(url) {
-    const urlPattern = 
+    const urlPattern =
         /^(http|https):\/\/[^\/]*\.(com|vn|org|net|edu|gov|mil|app|shop|blog|tech|online|io|co|ai|xyz)(\/.*)?$/i;
     return urlPattern.test(url)
 }
 
 export function setScrollDocument(isShow) {
     isShow ?
-    document.body.style.overflowY = 'hidden' :
-    document.body.style.overflowY = 'auto'
+        document.body.style.overflowY = 'hidden' :
+        document.body.style.overflowY = 'auto'
 }
 
 export function setScrollAuto() {

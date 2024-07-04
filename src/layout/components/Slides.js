@@ -104,7 +104,7 @@ function Slides({ api }) {
                     onTouchMove={handleDragMove}
                     onTouchEnd={handleDragEnd}
                     ref={slideInnerRef}
-                    className="flex transition-all duration-[800ms]">
+                    className="flex transition-all duration-700">
                     {slides.slice(0, 10).map((slide, index) => (
                         <Slide
                             key={index}

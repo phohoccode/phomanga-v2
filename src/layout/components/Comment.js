@@ -125,7 +125,7 @@ function Comment({ setIsShowMessage, slug, id }) {
                                             src={user?.picture}
                                             alt='avartar' />
                                     </figure>
-                                    <div className='w-full h-full p-[12px] rounded-[8px] bg-[#f2f3f5] dark:bg-[rgba(255,255,255,0.2)]'>
+                                    <div className='w-full h-full p-[12px] rounded-[8px] bg-[#f2f3f5] dark:bg-[rgba(204,204,204,0.2)]'>
                                         <div className=''>
                                             {index !== indexEdit &&
                                                 <Fragment>

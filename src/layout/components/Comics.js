@@ -21,7 +21,7 @@ function Comics({ api }) {
                     </h4>
                     <Link
                         to={`/detail${data?.data?.breadCrumb[0]?.slug}`}
-                        className='block text-[#10b981] font-[600] transition-all hover:underline group'>
+                        className='block text-[#10b981] font-[600] transition-all hover:underline group text-lg'>
                         Xem thêm
                         <i className="ml-[4px] group-hover:translate-x-[2px] transition-all fa-solid fa-angle-right"></i>
                     </Link>

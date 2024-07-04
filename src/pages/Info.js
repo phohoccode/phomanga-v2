@@ -101,8 +101,8 @@ function Info() {
         storage.set('comic-storage', newComic)
         width > 1023 && setQuantityComicArchive(newComic.length)
         setIsSave(!isSave)
-        toast.success('Xoá truyện thành công!', { duration: 1000 })
         setIsOpenDiaLog(true)
+        toast.success('Xoá truyện thành công!', { duration: 1000 })
     }
 
     const handleSortComic = () => {
@@ -113,8 +113,8 @@ function Info() {
             !isCollapse ? chapters.reverse() : chapters.reverse().slice(0, 39))
         setValueSearchChapter('')
         isSort ?
-            toast('Chương được sắp xếp tăng dần', { duration: 2000 }) :
-            toast('Chương được sắp xếp giảm dần', { duration: 2000 })
+            toast('Chương được sắp xếp tăng dần', { duration: 1000 }) :
+            toast('Chương được sắp xếp giảm dần', { duration: 1000 })
     }
 
     return (
@@ -122,7 +122,7 @@ function Info() {
             {!data && <h4 className='text-2xl font-[600] dark:text-[#fff]'>Đang tải dữ liệu...</h4>}
             {data &&
                 <Fragment>
-                    <div className='lg:flex lg:flex-row mobile:flex-col mobile:gap-[12px] p-[16px] bg-[rgba(16,185,129,0.15)] rounded-[8px] dark:bg-[#ccc]'>
+                    <div className='lg:flex lg:flex-row mobile:flex-col mobile:gap-[12px] p-[16px] bg-[rgba(16,185,129,0.15)] rounded-[8px] dark:bg-[rgba(204,204,204,0.2)]'>
                         <figure className="flex-shrink-0 lg:w-[200px] mobile:w-full lg:h-[300px] mobile:h-auto overflow-hidden rounded-[8px]">
                             <img
                                 src={`https://otruyenapi.com/uploads/comics/${infoComic?.thumb_url}`}
@@ -130,7 +130,7 @@ function Info() {
                             />
                         </figure>
                         <div className='overflow-hidden flex flex-col gap-[4px] flex-1 lg:pl-[32px]'>
-                            <h4 className="text-3xl font-[600] lg:mt-0 mobile:mt-[16px]">{infoComic?.name}</h4>
+                            <h4 className="text-3xl font-[600] lg:mt-0 mobile:mt-[16px] dark:text-[#fff]">{infoComic?.name}</h4>
                             <div className='flex gap-[12px] my-[12px]'>
                                 {!isSave ? (
                                     <button
@@ -159,14 +159,14 @@ function Info() {
                             <ul className='flex gap-[12px] text-lg'>
                                 <b className="text-[#10b981]">Tác giả: </b>
                                 {author.map((author, index) => (
-                                    <li className={('text')} key={index}>
+                                    <li className='dark:text-[#fff]' key={index}>
                                         {author || 'Chưa cập nhật'}
                                     </li>
                                 ))}
                             </ul>
                             <div className='flex gap-[12px] text-lg'>
                                 <b className="text-[#10b981]">Ngày cập nhật:</b>
-                                <span className={('text')}>{formatDate(infoComic?.updatedAt)}</span>
+                                <span className='dark:text-[#fff]'>{formatDate(infoComic?.updatedAt)}</span>
                             </div>
                             <ul className='flex gap-[12px] text-lg flex-wrap'>
                                 <b className="text-[#10b981]">Thể loại: </b>
@@ -181,6 +181,7 @@ function Info() {
                             <div>
                                 <b className="text-[#10b981] text-lg">Nội dung: </b>
                                 <p
+                                    className="dark:text-[#fff]"
                                     dangerouslySetInnerHTML={{ __html: infoComic?.content }}>
                                 </p>
                             </div>

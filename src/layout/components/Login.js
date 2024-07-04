@@ -2,13 +2,14 @@ import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import { useContext, useEffect, useState } from 'react';
 import Context from '../../state/Context';
 import toast from 'react-hot-toast';
+import storage from '../../utils'
 
 function Login() {
     const { setIsLogin, setUser } = useContext(Context)
 
     useEffect(() => {
-        const savedUser = localStorage.getItem('user')
-        savedUser && setUser(JSON.parse(savedUser))
+        const savedUser = storage.get('user', null)
+        savedUser && setUser(savedUser)
     }, [])
 
     const handleLogin = useGoogleLogin({
@@ -18,6 +19,7 @@ function Login() {
         },
         onError: () => {
             console.log('Login Failed!');
+            toast.error('Đăng nhập thất bại!', { duration: 1000 })
         }
     })
 
@@ -31,8 +33,7 @@ function Login() {
             const userInfo = await response.json()
             setUser(userInfo)
             setIsLogin(true)
-            console.log(userInfo);
-            localStorage.setItem('user', JSON.stringify(userInfo))
+            storage.set('user', userInfo)
             toast.success(`Xin chào! ${userInfo?.name}`, { duration: 1500 })
         } catch (error) {
             console.log(error);
