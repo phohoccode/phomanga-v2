@@ -9,22 +9,24 @@ function Archive() {
     const {
         setIsOpenDiaLog,
         isOpenDiaLog,
-        setQuantityComicArchive } = useContext(Context)
+        setQuantityComicArchive, user } = useContext(Context)
     const [comics, setComics] = useState([])
 
     useEffect(() => {
         const comicStorage = storage.get('comic-storage', [])
-        setComics(comicStorage)
-    }, [])
+        setComics(comicStorage[user?.email] || [])
+    }, [user])
 
     useEffect(() => {
         setScrollDocument(isOpenDiaLog)
     }, [isOpenDiaLog])
 
     const handleDeleteAll = () => {
+        const comicStorage = storage.get('comic-storage', {})
+        comicStorage[user?.email] = []
         setComics([])
         setQuantityComicArchive(0)
-        storage.set('comic-storage', [])
+        storage.set('comic-storage', comicStorage)
         toast.success('Xoá tất cả thành công!')
     }
 

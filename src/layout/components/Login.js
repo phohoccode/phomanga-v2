@@ -1,8 +1,9 @@
-import { useGoogleLogin, googleLogout } from '@react-oauth/google';
-import { useContext, useEffect, useState } from 'react';
+import { useGoogleLogin } from '@react-oauth/google';
+import { useContext, useEffect } from 'react';
 import Context from '../../state/Context';
 import toast from 'react-hot-toast';
 import storage from '../../utils'
+import backgroundImage from '../../assets/background.jpg'
 
 function Login() {
     const { setIsLogin, setUser } = useContext(Context)
@@ -31,6 +32,7 @@ function Login() {
                 },
             })
             const userInfo = await response.json()
+            userInfo['background'] = backgroundImage
             setUser(userInfo)
             setIsLogin(true)
             storage.set('user', userInfo)

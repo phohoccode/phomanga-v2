@@ -2,13 +2,13 @@ import { useState, useEffect, Fragment, useContext, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import useFetch from '../hooks/UseFetch';
 import toast from 'react-hot-toast';
-import storage, { setScrollDocument, scrollToBottom } from '../utils'
+import storage, { setScrollDocument, scrollToBottom, scrollToTop } from '../utils'
 import Comment from '../layout/components/Comment';
 import Context from '../state/Context';
 import { comic, comicImage } from '../api';
 
 function Read() {
-    const { setQuantityComicHistory, width, isLogin } = useContext(Context)
+    const { setQuantityComicHistory, width, isLogin, user } = useContext(Context)
     const navigate = useNavigate()
     const params = useParams()
     const [data] = useFetch(`${comic}/${params.slug}`)
@@ -41,17 +41,23 @@ function Read() {
         if (dataChapter) {
             setImages(dataChapter?.data?.item?.chapter_image || [])
             setChapterPath(dataChapter?.data?.item?.chapter_path)
-
             const historyStorage = storage.get('history-storage', {})
-            const isExistComic = historyStorage[params.slug]?.some(
-                comic => comic?.data?.item?._id === params.id) || false
-
+            if (!historyStorage[user?.email]) {
+                historyStorage[user?.email] = {}
+            }
+            if (!historyStorage[user?.email][params?.slug]) {
+                historyStorage[user?.email][params?.slug] = []
+            }
+            const isExistComic =
+                historyStorage[user?.email][params?.slug]?.some(comic =>
+                    comic?.data?.item?._id === params?.id || false)
             if (!isExistComic) {
-                historyStorage[params.slug] =
-                    [...(historyStorage[params.slug] || []), dataChapter]
+                historyStorage[user?.email][params?.slug] = [
+                    ...(historyStorage[user?.email][params?.slug]), dataChapter
+                ]
                 storage.set('history-storage', historyStorage)
                 width > 1023 &&
-                    setQuantityComicHistory(Object.keys(historyStorage).length)
+                    setQuantityComicHistory(Object.keys(historyStorage[user?.email]).length)
             }
             toast(`Bạn đang ở chương ${dataChapter?.data?.item?.chapter_name}`, { duration: 2000 })
         }
@@ -174,19 +180,21 @@ function Read() {
                         </li>
                     ))}
                 </ul>
-                <div className='fixed max-w-[300px] min-w-[50px] right-[32px] bottom-[32px] flex flex-col gap-[12px] p-[16px] rounded-[16px] shadow-sm bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)]'>
-                    {!isShowTools ? (
-                        <button
-                            onClick={() => setIsShowTools(true)}
-                            className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'>
-                            <i className="mr-[8px] fa-solid fa-screwdriver-wrench"></i>
-                            Công cụ
-                        </button>
-                    ) : (
-                        <Fragment>
+                {!isShowTools ? (
+                    <button
+                        onClick={() => setIsShowTools(true)}
+                        className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] fixed lg:bottom-[32px] lg:right-[32px] mobile:right-[16px] mobile:bottom-[16px]'>
+                        <i className="mr-[8px] fa-solid fa-screwdriver-wrench"></i>
+                        Hộp công cụ
+                    </button>
+
+                ) : (
+                    <Fragment>
+                        <div onClick={() => setIsShowTools(false)} className='fixed inset-0 z-[9998]'></div>
+                        <div className='fixed z-[9999] max-w-[300px] min-w-[50px] lg:right-[32px] lg:bottom-[32px] mobile:right-[16px] mobile:bottom-[16px] flex flex-col gap-[12px] p-[16px] rounded-[16px] shadow-sm bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)]'>
                             <button
                                 onClick={() => setIsShowTools(false)}
-                                 className='flex ml-auto text-2xl dark:text-[#fff]'>
+                                className='flex ml-auto text-2xl dark:text-[#fff] items-center justify-center w-[32px] h-[32px] rounded-full duration-300 hover:bg-[#e3e3e3] dark:hover:bg-[#636363]'>
                                 <i className="fa-solid fa-xmark"></i>
                             </button>
                             <button
@@ -210,10 +218,16 @@ function Read() {
                                 <span>Bình luận</span>
                             </button>
                             <button
-                                className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'
+                                className={`select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] ${isScroll && 'animate-pulse'}`}
                                 onClick={handleScroll}>
                                 <i className="mr-[8px] fa-solid fa-robot"></i>
                                 {!isScroll ? (<span>Tự động cuộn</span>) : (<span>Đang cuộn</span>)}
+                            </button>
+                            <button
+                                className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'
+                                onClick={scrollToTop}>
+                                <i className="mr-[8px] fa-solid fa-arrow-up"></i>
+                                <span>Cuộn đầu trang</span>
                             </button>
                             <button
                                 className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'
@@ -221,9 +235,9 @@ function Read() {
                                 <i className="mr-[8px] fa-solid fa-arrow-down"></i>
                                 <span>Cuộn cuối trang</span>
                             </button>
-                        </Fragment>
-                    )}
-                </div>
+                        </div>
+                    </Fragment>
+                )}
             </div>
             {isShowMessage &&
                 <Comment
@@ -232,7 +246,7 @@ function Read() {
                     setIsShowMessage={setIsShowMessage}
                 />
             }
-        </Fragment>
+        </Fragment >
     );
 }
 

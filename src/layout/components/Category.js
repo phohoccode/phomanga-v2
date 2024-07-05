@@ -29,10 +29,10 @@ function Category({ data, setIsShowCategory, onCloseModalMobile }) {
                     className="fixed inset-0 bg-[rgba(0,0,0,0.5)] z-[999] animate-fade-in">
                     <div
                         ref={modalRef}
-                        className="absolute bg-[#fff] dark:bg-[#282828] shadow-custom top-[50%] translate-y-[-50%] translate-x-[-50%] left-[50%] rounded-[16px] min-w-[60%] h-auto">
-                        <div className="flex justify-between p-[16px] items-center border-b-[1px] border-solid border-[#ccc]">
+                        className="absolute bg-[#fff] dark:bg-[#2f2f2f] shadow-custom top-[50%] translate-y-[-50%] translate-x-[-50%] left-[50%] rounded-[16px] min-w-[60%] h-auto">
+                        <div className="flex justify-between p-[16px] items-center border-b-[1px] border-solid border-[#e3e3e3] dark:border-[#636363]">
                             <h4 className="text-3xl font-[600] dark:text-[#fff]">Thể loại</h4>
-                            <button onClick={handleCloseModal}>
+                            <button className="flex items-center justify-center w-[44px] h-[44px] rounded-full duration-300 hover:bg-[#e3e3e3] dark:hover:bg-[#636363]" onClick={handleCloseModal}>
                                 <i className="dark:text-[#fff] text-[30px] fa-solid fa-xmark"></i>
                             </button>
                         </div>

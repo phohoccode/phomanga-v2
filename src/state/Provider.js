@@ -17,12 +17,30 @@ function Provider({ children }) {
         return storage.get('theme', 'light')
     })
     const [quantityComicArchive, setQuantityComicArchive] = useState(() => {
-        return storage.get('comic-storage', []).length
+        const comicStorage = storage.get('comic-storage', {})
+        return comicStorage[user?.email]?.length
     })
     const [quantityComicHistory, setQuantityComicHistory] = useState(() => {
         const historyStorage = storage.get('history-storage', {})
-        return Object.keys(historyStorage).length
+        if (!historyStorage[user?.email]) {
+            historyStorage[user?.email] = {}
+        }
+        return Object.keys(historyStorage[user?.email])?.length
     })
+
+    useEffect(() => {
+        setQuantityComicArchive(() => {
+            const comicStorage = storage.get('comic-storage', {})
+            return comicStorage[user?.email]?.length
+        })
+        setQuantityComicHistory(() => {
+            const historyStorage = storage.get('history-storage', {})
+            if (!historyStorage[user?.email]) {
+                historyStorage[user?.email] = {}
+            }
+            return Object.keys(historyStorage[user?.email]).length
+        })
+    }, [user])
 
     useEffect(() => {
         const handleReSize = () => {
@@ -35,7 +53,7 @@ function Provider({ children }) {
     useEffect(() => {
         storage.set('theme', theme)
         document.documentElement.classList.remove('light', 'dark')
-        theme === 'light' ? 
+        theme === 'light' ?
             document.documentElement.classList.toggle('light') :
             document.documentElement.classList.toggle('dark')
     }, [theme])

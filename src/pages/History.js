@@ -9,26 +9,31 @@ function History() {
     const {
         setIsOpenDiaLog,
         isOpenDiaLog,
-        setQuantityComicHistory } = useContext(Context)
+        setQuantityComicHistory, user } = useContext(Context)
     const [comics, setComics] = useState({})
     const [slugs, setSlugs] = useState([])
 
     useEffect(() => {
         const historyStorage = storage.get('history-storage', {})
-        const slugs = Object.keys(historyStorage)
-        setComics(historyStorage)
+        if (!historyStorage[user?.email]) {
+            historyStorage[user?.email] = {}
+        }
+        const slugs = Object.keys(historyStorage[user?.email])
+        setComics(historyStorage[user?.email])
         setSlugs(slugs)
-    }, [])
+    }, [user])
 
     useEffect(() => {
         setScrollDocument(isOpenDiaLog)
     }, [isOpenDiaLog])
 
     const handleDeleteAll = () => {
+        const historyStorage = storage.get('history-storage', {})
+        historyStorage[user?.email] = {}
         setSlugs([])
         setComics({})
         setQuantityComicHistory(0)
-        storage.set('history-storage', {})
+        storage.set('history-storage', historyStorage)
         toast.success('Xoá lịch sử thành công!')
     }
 
@@ -55,7 +60,7 @@ function History() {
                         <h4 className="text-2xl text-[#10b981] capitalize font-[600] my-[24px]">{`${slug} (${comics[slug].length} chương đã xem)`}</h4>
                         <ul key={slug} className='flex mx-[-8px] flex-wrap gap-y-[24px]'>
                             {comics[slug].map((comic, index) => (
-                                <li key={index} className='lg:w-[12.5%] mobile:w-[50%] flex-shrink-0 px-[8px] transition-all relative overflow-hidden group hover:translate-y-[-8px] duration-300'>
+                                <li key={index} className='lg:w-[12.5%] md:w-[16.66667%] sm:w-[25%] mobile:w-[50%] flex-shrink-0 px-[8px] transition-all relative overflow-hidden group hover:translate-y-[-8px] duration-300'>
                                     <Link to={`/read/${slug}/${comic?.data?.item?._id}`}>
                                         <figure className="h-[260px] rounded-[8px] overflow-hidden transition-all border border-solid border-[#e2e2e2] group-hover:hover:shadow-comic select-none hover:animate-pulse">
                                             <img

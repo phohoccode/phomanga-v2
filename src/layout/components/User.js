@@ -1,4 +1,4 @@
-import { useContext, useRef, useState, useEffect } from "react";
+import { Fragment, useContext, useRef, useState } from "react";
 import Context from "../../state/Context";
 import { Link } from "react-router-dom";
 
@@ -14,26 +14,37 @@ function User() {
                 <img src={user?.picture} act='logo' />
             </figure>
             {isShowUser &&
-                <div className="absolute z-[9999] right-0 top-[130%] shadow-custom bg-[#fff] dark:bg-[#282828] dark:text-[#fff] min-w-[230px] max-w-[300px] p-[16px] rounded-[8px]">
-                    <div
-                        onClick={() => setIsShowUser(false)}
-                        className="absolute right-[8px] top-0 p-[8px] cursor-pointer">
-                        <i className="fa-solid fa-xmark"></i>
+                <Fragment>
+                    <div onClick={() => setIsShowUser(false)} className="fixed inset-0 z-[9997]"></div>
+                    <div className="absolute z-[9998] right-0 top-[130%] border border-solid border-[#e3e3e3] dark:border-[#636363] shadow-sm bg-[#fff] dark:bg-[#2f2f2f] dark:text-[#fff] min-w-[230px] max-w-[300px] rounded-[8px]">
+                        <button onClick={() => setIsShowUser(false)} className="absolute top-[8px] right-[8px] flex items-center justify-center w-[32px] h-[32px] rounded-full duration-300 hover:bg-[#e3e3e3] dark:hover:bg-[#636363]">
+                            <i className="fa-solid fa-xmark"></i>
+                        </button>
+                        <div className="flex items-center gap-[12px] px-[16px] mt-[32px]">
+                            <figure className="w-[50px] h-[50px] rounded-full overflow-hidden flex-shrink-0">
+                                <img src={user?.picture} alt={user?.name} />
+                            </figure>
+                            <span className="flex-1 font-[900]">{user?.name}</span>
+                        </div>
+                        <div className="w-full h-[1px] bg-[#e3e3e3] dark:bg-[#636363] mt-[12px]"></div>
+                        <div className="px-[16px] py-[8px]">
+                            <Link
+                                className="p-[8px] block mx-[-8px] font-[600] duration-300 rounded-[8px] hover:bg-[rgba(170,170,170,0.3)]"
+                                onClick={() => setIsShowUser(false)}
+                                to='/user'>
+                                <i className="mr-[8px] fa-regular fa-user"></i>
+                                Trang cá nhân
+                            </Link>
+                            <div
+                                className="mt-[8px] cursor-pointer p-[8px] block mx-[-8px] font-[600] duration-300 rounded-[8px] hover:bg-[rgba(170,170,170,0.3)]"
+                                onClick={handleLogout}>
+                                <i className="mr-[8px] fa-solid fa-arrow-right-from-bracket"></i>
+                                Đăng xuất
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex items-center gap-[12px]">
-                        <figure className="w-[50px] h-[50px] rounded-full overflow-hidden flex-shrink-0">
-                            <img src={user?.picture} />
-                        </figure>
-                        <span className="flex-1 font-[500]">{user?.name}</span>
-                    </div>
-                    <div className="w-full h-[1px] bg-[#eee] my-[12px]"></div>
-                    <Link
-                        onClick={() => setIsShowUser(false)}
-                        to='/user'>
-                        Trang cá nhân
-                    </Link>
-                    <div className="mt-[8px] cursor-pointer" onClick={handleLogout}>Đăng xuất</div>
-                </div>}
+                </Fragment>
+            }
         </div>
     );
 }

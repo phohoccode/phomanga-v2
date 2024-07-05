@@ -44,16 +44,18 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
             ref={containerRef}
             onClick={handleWrapperClick}
             className="fixed inset-0 bg-[#0000004d] min-h-[100%] animate-fade-in">
-            <div ref={modalRef} className="p-[16px] relative w-[80%] bg-[#fff] dark:bg-[#282828] dark:text-[#fff] h-full left-0 overflow-y-auto overscroll-y-none animate-slide-in">
-                <div className="flex p-[16px] items-center justify-between absolute top-0 left-0 right-0">
+            <div ref={modalRef} className="relative w-[80%] bg-[#fff] dark:bg-[#2f2f2f] dark:text-[#fff] h-full left-0 overflow-y-auto overscroll-y-none animate-slide-in p-[16px]">
+                <div className="flex items-center justify-between absolute top-0 left-0 right-0">
+                    <button 
+                        onClick={handleSetTheme} 
+                        className="cursor-pointer w-[60px] flex items-center justify-center h-[60px]">
+                        <i className="text-[30px] fa-solid fa-circle-half-stroke"></i>
+                    </button>
                     <button
                         onClick={handleCloseModal}
-                        className="text-[30px]">
+                        className="text-[30px] w-[60px] flex items-center justify-center h-[60px]">
                         <i className="fa-solid fa-xmark"></i>
                     </button >
-                    <div onClick={handleSetTheme} className="w-[30px] h-[30px] cursor-pointer">
-                        <i className="text-[30px] fa-solid fa-circle-half-stroke"></i>
-                    </div>
                 </div>
                 <div className="h-[40px] flex items-center px-[8px] py-[4px] border-2 border-solid border-[#ccc] rounded-[8px] transition-all w-full focus-within:border-[#10b981] mt-[64px]">
                     <input
@@ -75,7 +77,7 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
                         <NavLink to='/archive' className={`block text-lg hover:text-[#10b981] transition-all py-[8px] ${pathname === '/archive' ? 'text-[#10b981] font-[900]' : 'text-[#000] dark:text-[#fff]'}`}>Kho lưu trữ</NavLink>
                     </li>
                     <li onClick={handleCloseModal}>
-                        <NavLink to='history' className={`block text-lg hover:text-[#10b981] transition-all py-[8px] ${pathname === '/history' ? 'text-[#10b981] font-[900]' : 'text-[#000] dark:text-[#fff]'}`} >Lịch sử đã xem</NavLink>
+                        <NavLink to='/history' className={`block text-lg hover:text-[#10b981] transition-all py-[8px] ${pathname === '/history' ? 'text-[#10b981] font-[900]' : 'text-[#000] dark:text-[#fff]'}`} >Lịch sử đã xem</NavLink>
                     </li>
                     <li>
                         <div onClick={() => setIsShowCategory(!isShowCategory)} className="flex items-center text-lg gap-[8px] py-[8px]">

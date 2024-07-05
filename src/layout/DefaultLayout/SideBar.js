@@ -25,7 +25,7 @@ function SideBar() {
                 <li>
                     <NavLink
                         to='/'
-                        className={`flex flex-col items-center justify-center w-[80px] h-[80px] gap-[8px] duration-300 select-none rounded-[16px] hover:bg-[#e8ebed] dark:hover:bg-[#fff] dark:hover:text-[#000] ${pathname === '/' ? 'bg-[#e8ebed]' : 'bg-[#fff] dark:bg-[#282828] dark:text-[#fff]'}`}>
+                        className={`flex flex-col items-center justify-center w-[80px] h-[80px] gap-[8px]  select-none rounded-[16px] hover:bg-[#e8ebed] dark:hover:bg-[rgba(204,204,204,0.2)] dark:hover:text-[#fff] ${pathname === '/' ? 'bg-[#e8ebed] dark:bg-[rgba(204,204,204,0.2)] dark:text-[#fff]' : 'bg-[#fff] dark:bg-transparent dark:text-[#fff]'}`}>
                         <i className="text-[20px] fa-solid fa-house"></i>
                         <span className="text-xs font-[500]">Trang chủ</span>
                     </NavLink>
@@ -33,7 +33,7 @@ function SideBar() {
                 <li>
                     <NavLink
                         to='/detail/danh-sach/truyen-moi'
-                        className={`flex flex-col items-center justify-center w-[80px] h-[80px] gap-[8px] duration-300 select-none rounded-[16px] hover:bg-[#e8ebed] dark:hover:bg-[#fff] dark:hover:text-[#000] ${pathname === '/detail/danh-sach/truyen-moi' ? 'bg-[#e8ebed]' : 'bg-[#fff] dark:bg-[#282828] dark:text-[#fff]'}`}>
+                        className={`flex flex-col items-center justify-center w-[80px] h-[80px] gap-[8px]  select-none rounded-[16px] hover:bg-[#e8ebed] dark:hover:bg-[rgba(204,204,204,0.2)] dark:hover:text-[#fff] ${pathname === '/detail/danh-sach/truyen-moi' ? 'bg-[#e8ebed] dark:bg-[rgba(204,204,204,0.2)] dark:text-[#fff]' : 'bg-[#fff] dark:bg-transparent dark:text-[#fff]'}`}>
                         <i className="text-[20px] fa-solid fa-rotate"></i>
                         <span className="text-xs font-[500]">Mới nhất</span>
                     </NavLink>
@@ -41,7 +41,7 @@ function SideBar() {
                 <li className="relative">
                     <NavLink
                         to='/archive'
-                        className={`flex flex-col items-center justify-center w-[80px] h-[80px] gap-[8px] duration-300 select-none rounded-[16px] hover:bg-[#e8ebed] dark:hover:bg-[#fff] dark:hover:text-[#000] ${pathname === '/archive' ? 'bg-[#e8ebed]' : 'bg-[#fff] dark:bg-[#282828] dark:text-[#fff]'}`}>
+                        className={`flex flex-col items-center justify-center w-[80px] h-[80px] gap-[8px]  select-none rounded-[16px] hover:bg-[#e8ebed] dark:hover:bg-[rgba(204,204,204,0.2)] dark:hover:text-[#fff] ${pathname === '/archive' ? 'bg-[#e8ebed] dark:bg-[rgba(204,204,204,0.2)] dark:text-[#fff]' : 'bg-[#fff] dark:bg-transparent dark:text-[#fff]'}`}>
                         <i className="text-[20px] fa-regular fa-bookmark"></i>
                         <span className="text-xs font-[500]">Kho lưu trữ</span>
                     </NavLink>
@@ -54,7 +54,7 @@ function SideBar() {
                 <li className="relative">
                     <NavLink
                         to='/history'
-                        className={`flex flex-col items-center justify-center w-[80px] h-[80px] gap-[8px] duration-300 select-none rounded-[16px] hover:bg-[#e8ebed] dark:hover:bg-[#fff] dark:hover:text-[#000] ${pathname === '/history' ? 'bg-[#e8ebed]' : 'bg-[#fff] dark:bg-[#282828] dark:text-[#fff]'}`}>
+                        className={`flex flex-col items-center justify-center w-[80px] h-[80px] gap-[8px]  select-none rounded-[16px] hover:bg-[#e8ebed] dark:hover:bg-[rgba(204,204,204,0.2)] dark:hover:text-[#fff] ${pathname === '/history' ? 'bg-[#e8ebed] dark:bg-[rgba(204,204,204,0.2)] dark:text-[#fff]' : 'bg-[#fff] dark:bg-transparent dark:text-[#fff]'}`}>
                         <i className="text-[20px] fa-solid fa-clock-rotate-left"></i>
                         <span className="text-xs font-[500]">Lịch sử</span>
                     </NavLink>
@@ -65,7 +65,7 @@ function SideBar() {
                         </div>}
                 </li>
                 <li onClick={() => setIsShowCategory(true)}>
-                    <div className={classNames('cursor-pointer flex flex-col items-center justify-center w-[80px] h-[80px] transition-all duration-300 rounded-[16px] overflow-hidden hover:bg-[#e8ebed] dark:hover:bg-[#fff] dark:hover:text-[#000] select-none bg-[#fff] dark:bg-[#282828] dark:text-[#fff] gap-[8px]')}>
+                    <div className={classNames('cursor-pointer flex flex-col items-center justify-center w-[80px] h-[80px] rounded-[16px] overflow-hidden hover:bg-[#e8ebed] dark:hover:bg-[rgba(204,204,204,0.2)] dark:hover:text-[#fff] select-none bg-[#fff] dark:bg-transparent dark:text-[#fff] gap-[8px]')}>
                         <i className="text-[20px] fa-solid fa-table-cells-large"></i>
                         <span className="text-xs font-[500]">Thể loại</span>
                     </div>

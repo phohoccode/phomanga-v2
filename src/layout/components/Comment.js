@@ -10,7 +10,7 @@ function Comment({ setIsShowMessage, slug, id }) {
     const [valueEditComment, setValueEditComment] = useState('')
     const [comments, setComments] = useState(() => {
         const commentStorage = storage.get('comments', {})
-        return commentStorage?.[slug]?.[id] || []
+        return commentStorage?.[user?.email]?.[slug]?.[id] || []
     })
     const [indexDelete, setIndexDelete] = useState(-1)
     const [indexEdit, setIndexEdit] = useState(-1)
@@ -45,15 +45,21 @@ function Comment({ setIsShowMessage, slug, id }) {
                 value: valueComment,
                 time: new Date()
             }
-            if (!commentStorage[slug]) {
-                commentStorage[slug] = {}
+
+            if (!commentStorage[user?.email]) {
+                commentStorage[user?.email] = {}
             }
-            if (!commentStorage[slug][id]) {
-                commentStorage[slug][id] = []
+            if (!commentStorage[user?.email][slug]) {
+                commentStorage[user?.email][slug] = {}
             }
-            commentStorage[slug][id] = [...commentStorage[slug][id], newComment]
+            if (!commentStorage[user?.email][slug][id]) {
+                commentStorage[user?.email][slug][id] = []
+            }
+            commentStorage[user?.email][slug][id] = [
+                ...commentStorage[user?.email][slug][id], newComment
+            ]
             storage.set('comments', commentStorage)
-            setComments(commentStorage[slug][id] || [])
+            setComments(commentStorage[user?.email][slug][id] || [])
             setValueComment('')
             toast.success('Thêm bình luận thành công!')
         }
@@ -61,10 +67,10 @@ function Comment({ setIsShowMessage, slug, id }) {
 
     const handleDeleteComment = () => {
         const commentStorage = storage.get('comments', {})
-        commentStorage[slug][id].splice(indexDelete, 1)
+        commentStorage[user?.email][slug][id].splice(indexDelete, 1)
         storage.set('comments', commentStorage)
-        setComments(commentStorage[slug][id])
-        setIndexDelete(-1)
+        setComments(commentStorage[user?.email][slug][id])
+        setIndexEdit(-1)
         toast.success('Xoá bình luận thành công')
     }
 
@@ -75,9 +81,9 @@ function Comment({ setIsShowMessage, slug, id }) {
 
     const handleSaveEditComment = () => {
         const commentStorage = storage.get('comments', {})
-        commentStorage[slug][id][indexEdit].value = valueEditComment
+        commentStorage[user?.email][slug][id][indexEdit].value = valueEditComment
         storage.set('comments', commentStorage)
-        setComments(commentStorage[slug][id])
+        setComments(commentStorage[user?.email][slug][id])
         setIndexEdit(-1)
         toast.success('Sửa bình luận thành công')
     }
@@ -149,7 +155,7 @@ function Comment({ setIsShowMessage, slug, id }) {
                                             }
                                             {index === indexEdit &&
                                                 <textarea
-                                                    className='p-[16px] min-h-[160px] w-full mb-[12px] border-2 border-solid border-[#ccc] duration-300 text-base focus:border-[#10b981] outline-none rounded-[8px]'
+                                                    className='lg:p-[16px] mobile:p-[8px] min-h-[160px] w-full mb-[12px] border-2 border-solid border-[#ccc] duration-300 text-base focus:border-[#10b981] outline-none rounded-[8px] dark:text-[#000]'
                                                     ref={commentEditRef}
                                                     value={valueEditComment}
                                                     onChange={e => setValueEditComment(e.target.value)}>

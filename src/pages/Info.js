@@ -10,7 +10,7 @@ import DiaLog from "../layout/components/Dialog";
 import Context from "../state/Context";
 
 function Info() {
-    const { width, isOpenDiaLog, setIsOpenDiaLog, setQuantityComicArchive } = useContext(Context)
+    const { width, isOpenDiaLog, setIsOpenDiaLog, setQuantityComicArchive, user } = useContext(Context)
     const params = useParams()
     const [data] = useFetch(`${comic}/${params.slug}`)
     const [valueSearchChapter, setValueSearchChapter] = useState('')
@@ -65,11 +65,10 @@ function Info() {
     }, [isCollapse])
 
     useEffect(() => {
-        const comicStorage = storage.get('comic-storage', [])
-        const isSave = comicStorage.some(
-            comic => comic?.slug === params.slug)
+        const comicStorage = storage.get('comic-storage', {})
+        const isSave = comicStorage[user?.email]?.some(comic => comic?.slug === params?.slug)
         setIsSave(isSave)
-    }, [params.slug])
+    }, [params.slug, user])
 
     const handleSearchChapter = (event) => {
         setValueSearchChapter(event.target.value)
@@ -86,22 +85,35 @@ function Info() {
     }
 
     const handleSaveComic = () => {
-        const comicStorage = storage.get('comic-storage', [])
-        const newComicStorage = [...comicStorage, data?.data?.item]
-        storage.set('comic-storage', newComicStorage)
-        setIsSave(!isSave)
-        width > 1023 && setQuantityComicArchive(newComicStorage.length)
+        if (!user) {
+            toast.error('Bạn cần đăng nhập để lưu truyện!', { duration: 2000 })
+            return
+        }
+        
+        const comicStorage = storage.get('comic-storage', {})
+
+        if (!comicStorage[user?.email]) {
+            comicStorage[user?.email] = []
+        }
+        comicStorage[user?.email] = [
+            ...comicStorage[user?.email], data?.data?.item
+        ]
+        storage.set('comic-storage', comicStorage)
+        width > 1023 && 
+            setQuantityComicArchive(comicStorage[user?.email].length)
+        setIsSave(true)
         toast.success('Lưu truyện thành công!', { duration: 1000 })
     }
 
     const handleDeleteComic = () => {
-        const comicStorage = storage.get('comic-storage', [])
-        const newComic = comicStorage.filter(
-            comic => comic?.slug !== params.slug)
-        storage.set('comic-storage', newComic)
-        width > 1023 && setQuantityComicArchive(newComic.length)
-        setIsSave(!isSave)
-        setIsOpenDiaLog(true)
+        const comicStorage = storage.get('comic-storage', {})
+        comicStorage[user?.email] = 
+            comicStorage[user?.email].filter(
+                comic => comic?.slug !== params?.slug)
+        storage.set('comic-storage', comicStorage)
+        setIsSave(false)
+        width > 1023 && 
+            setQuantityComicArchive(comicStorage[user?.email].length)
         toast.success('Xoá truyện thành công!', { duration: 1000 })
     }
 
