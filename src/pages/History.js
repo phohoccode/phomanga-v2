@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect, Fragment } from "react"
 import Context from "../state/Context"
-import storage, { setScrollDocument } from '../utils'
+import storage, { setScrollDocument, handleSetActivity } from '../utils'
 import toast from "react-hot-toast"
 import DiaLog from "../layout/components/Dialog"
 import { Link } from "react-router-dom"
@@ -35,6 +35,7 @@ function History() {
         setQuantityComicHistory(0)
         storage.set('history-storage', historyStorage)
         toast.success('Xoá lịch sử thành công!')
+        handleSetActivity(user, [], 'history')
     }
 
     return (

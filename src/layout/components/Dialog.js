@@ -31,7 +31,7 @@ function DiaLog(props) {
                 <div className="p-[16px]">
                     <p className="mb-[24px] font-[600] text-lg">{props?.text}</p>
                     <div className="flex justify-end gap-[12px]">
-                        <button onClick={() => setIsOpenDiaLog(false)} className="px-[8px] py-[4px] bg-[#d90429] font-[600] rounded-[8px] text-lg transition-all hover:scale-[1.05]">
+                        <button onClick={() => setIsOpenDiaLog(false)} className="px-[8px] py-[4px] bg-[#d90429] font-[600] rounded-[8px] text-lg transition-all hover:scale-[1.05] text-[#fff]">
                             Huỷ bỏ
                         </button>
                         <button onClick={handleOkClick} className="px-[8px] py-[4px] bg-[#10b981] text-[#fff] rounded-[8px] text-lg transition-all hover:scale-[1.05] font-[600]">

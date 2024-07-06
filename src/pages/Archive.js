@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import Context from "../state/Context";
-import storage, { setScrollDocument } from '../utils'
+import storage, { setScrollDocument, handleSetActivity } from '../utils'
 import toast from "react-hot-toast";
 import Comic from "../layout/components/Comic";
 import DiaLog from "../layout/components/Dialog";
@@ -28,6 +28,7 @@ function Archive() {
         setQuantityComicArchive(0)
         storage.set('comic-storage', comicStorage)
         toast.success('Xoá tất cả thành công!')
+        handleSetActivity(user, [], 'archive')
     }
 
     return (

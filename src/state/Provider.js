@@ -62,6 +62,7 @@ function Provider({ children }) {
         googleLogout()
         setUser(null)
         setIsLogin(false)
+        window.location.href = '/'
         localStorage.removeItem('user')
     }
 

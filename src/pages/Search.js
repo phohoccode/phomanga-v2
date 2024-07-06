@@ -1,11 +1,14 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/UseFetch";
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment, useContext } from "react";
 import Comic from "../layout/components/Comic";
 import { search } from "../api";
 import Pagination from "../layout/components/Pagination";
+import Context from "../state/Context";
+import { handleSetActivity } from "../utils";
 
 function Search() {
+    const { user } = useContext(Context)
     const params = useParams()
     const [currentPage, setCurrentPage] = useState(1)
     const [data] = useFetch(
@@ -28,6 +31,7 @@ function Search() {
 
     useEffect(() => {
         setCurrentPage(1)
+        handleSetActivity(user, params?.keyword, 'search')
     }, [params.keyword])
 
     return (

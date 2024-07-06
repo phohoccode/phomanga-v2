@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment, useContext, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import useFetch from '../hooks/UseFetch';
 import toast from 'react-hot-toast';
-import storage, { setScrollDocument, scrollToBottom, scrollToTop } from '../utils'
+import storage, { setScrollDocument, scrollToBottom, scrollToTop, handleSetActivity } from '../utils'
 import Comment from '../layout/components/Comment';
 import Context from '../state/Context';
 import { comic, comicImage } from '../api';
@@ -39,18 +39,24 @@ function Read() {
 
     useEffect(() => {
         if (dataChapter) {
+            console.log(dataChapter);
             setImages(dataChapter?.data?.item?.chapter_image || [])
             setChapterPath(dataChapter?.data?.item?.chapter_path)
+
             const historyStorage = storage.get('history-storage', {})
+
             if (!historyStorage[user?.email]) {
                 historyStorage[user?.email] = {}
             }
+
             if (!historyStorage[user?.email][params?.slug]) {
                 historyStorage[user?.email][params?.slug] = []
             }
+
             const isExistComic =
                 historyStorage[user?.email][params?.slug]?.some(comic =>
                     comic?.data?.item?._id === params?.id || false)
+
             if (!isExistComic) {
                 historyStorage[user?.email][params?.slug] = [
                     ...(historyStorage[user?.email][params?.slug]), dataChapter
@@ -59,7 +65,10 @@ function Read() {
                 width > 1023 &&
                     setQuantityComicHistory(Object.keys(historyStorage[user?.email]).length)
             }
+
             toast(`Bạn đang ở chương ${dataChapter?.data?.item?.chapter_name}`, { duration: 2000 })
+
+            handleSetActivity(user, dataChapter, 'readComic')
         }
     }, [dataChapter])
 
@@ -241,6 +250,7 @@ function Read() {
             </div>
             {isShowMessage &&
                 <Comment
+                    dataChapter={dataChapter}
                     id={params.id}
                     slug={params.slug}
                     setIsShowMessage={setIsShowMessage}

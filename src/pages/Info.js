@@ -2,7 +2,7 @@ import useFetch from "../hooks/UseFetch";
 import { useParams } from "react-router-dom";
 import { comic } from "../api";
 import { useEffect, useState, Fragment, useContext } from "react";
-import storage, { formatDate, setScrollAuto, setScrollHidden } from '../utils'
+import storage, { formatDate, setScrollAuto, setScrollHidden, handleSetActivity } from '../utils'
 import { Link } from "react-router-dom";
 import ComicsSuggestions from "../layout/components/ComicsSuggestions";
 import toast from "react-hot-toast";
@@ -52,21 +52,31 @@ function Info() {
             setInfoComic(data?.data?.item || [])
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
-            setChapters(chapters.slice(0, 39))
+            setChapters(
+                width > 1024 ? chapters.slice(0, 39) : chapters.slice(0, 14)
+            )
             setIdStorage(handleSetIdStorage(comic))
             setIdRecently(handleSetIdRecently(chapters, comic))
         }
     }, [data, params.slug])
 
     useEffect(() => {
-        const chapters = data?.data?.item?.chapters?.[0]?.server_data || []
-        setChapters(!isCollapse ? chapters : chapters.slice(0, 39))
+        const chapters =
+            data?.data?.item?.chapters?.[0]?.server_data || []
+        setChapters(
+            !isCollapse ?
+                chapters : (
+                    width > 1024 ?
+                        chapters.slice(0, 39) :
+                        chapters.slice(0, 14))
+        )
         setValueSearchChapter('')
     }, [isCollapse])
 
     useEffect(() => {
         const comicStorage = storage.get('comic-storage', {})
-        const isSave = comicStorage[user?.email]?.some(comic => comic?.slug === params?.slug)
+        const isSave = comicStorage[user?.email]?.some(
+            comic => comic?.slug === params?.slug)
         setIsSave(isSave)
     }, [params.slug, user])
 
@@ -81,7 +91,12 @@ function Info() {
                         .toLowerCase()
                         .includes(event.target.value.toLowerCase())
             )
-        setChapters(!isCollapse ? filterChapters : filterChapters.slice(0, 39))
+        setChapters(
+            !isCollapse ? filterChapters : (
+                width > 1024 ?
+                    filterChapters.slice(0, 39) :
+                    filterChapters.slice(0, 14))
+        )
     }
 
     const handleSaveComic = () => {
@@ -89,7 +104,7 @@ function Info() {
             toast.error('Bạn cần đăng nhập để lưu truyện!', { duration: 2000 })
             return
         }
-        
+
         const comicStorage = storage.get('comic-storage', {})
 
         if (!comicStorage[user?.email]) {
@@ -99,22 +114,25 @@ function Info() {
             ...comicStorage[user?.email], data?.data?.item
         ]
         storage.set('comic-storage', comicStorage)
-        width > 1023 && 
+        width > 1023 &&
             setQuantityComicArchive(comicStorage[user?.email].length)
         setIsSave(true)
         toast.success('Lưu truyện thành công!', { duration: 1000 })
+        handleSetActivity(user, data, 'addComic')
     }
 
     const handleDeleteComic = () => {
         const comicStorage = storage.get('comic-storage', {})
-        comicStorage[user?.email] = 
+
+        comicStorage[user?.email] =
             comicStorage[user?.email].filter(
                 comic => comic?.slug !== params?.slug)
         storage.set('comic-storage', comicStorage)
         setIsSave(false)
-        width > 1023 && 
+        width > 1023 &&
             setQuantityComicArchive(comicStorage[user?.email].length)
         toast.success('Xoá truyện thành công!', { duration: 1000 })
+        handleSetActivity(user, data, 'removeComic')
     }
 
     const handleSortComic = () => {
@@ -274,7 +292,7 @@ function Info() {
                                 )
                             }
                         </ul>
-                        {chapters.length >= 39 &&
+                        {chapters.length >= 14 &&
                             <div className="flex justify-center mt-[16px] ">
                                 <span
                                     className="text-[#10b981] font-[900] cursor-pointer text-lg"

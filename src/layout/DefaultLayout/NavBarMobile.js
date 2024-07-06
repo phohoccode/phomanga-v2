@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Category from "../components/Category";
 import Context from "../../state/Context";
 
@@ -44,7 +44,7 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
             ref={containerRef}
             onClick={handleWrapperClick}
             className="fixed inset-0 bg-[#0000004d] min-h-[100%] animate-fade-in">
-            <div ref={modalRef} className="relative w-[80%] bg-[#fff] dark:bg-[#2f2f2f] dark:text-[#fff] h-full left-0 overflow-y-auto overscroll-y-none animate-slide-in p-[16px]">
+            <div ref={modalRef} className="relative w-[80%] bg-[#fff] dark:bg-[#2f2f2f] dark:text-[#fff] h-full left-0 animate-slide-in p-[16px]">
                 <div className="flex items-center justify-between absolute top-0 left-0 right-0">
                     <button 
                         onClick={handleSetTheme} 

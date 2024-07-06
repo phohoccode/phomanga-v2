@@ -2,9 +2,9 @@ import { useEffect, useRef, useState, useContext, Fragment } from 'react'
 import toast from 'react-hot-toast'
 import Context from '../../state/Context';
 import DiaLog from '../components/Dialog';
-import storage, { handleSelectedFocus, isUrlWithValidDomainSuffix, formatTime } from '../../utils'
+import storage, { handleSelectedFocus, isUrlWithValidDomainSuffix, formatTime, handleSetActivity } from '../../utils'
 
-function Comment({ setIsShowMessage, slug, id }) {
+function Comment({ setIsShowMessage, slug, id, dataChapter }) {
     const { setIsOpenDiaLog, isOpenDiaLog, user } = useContext(Context)
     const [valueComment, setValueComment] = useState('')
     const [valueEditComment, setValueEditComment] = useState('')
@@ -62,16 +62,19 @@ function Comment({ setIsShowMessage, slug, id }) {
             setComments(commentStorage[user?.email][slug][id] || [])
             setValueComment('')
             toast.success('Thêm bình luận thành công!')
+            handleSetActivity(user, { dataChapter, valueComment }, 'addComment')
         }
     }
 
     const handleDeleteComment = () => {
         const commentStorage = storage.get('comments', {})
+        const valueComment = commentStorage[user?.email][slug][id][indexDelete]?.value
         commentStorage[user?.email][slug][id].splice(indexDelete, 1)
         storage.set('comments', commentStorage)
         setComments(commentStorage[user?.email][slug][id])
         setIndexEdit(-1)
         toast.success('Xoá bình luận thành công')
+        handleSetActivity(user, { dataChapter, valueComment }, 'removeComment')
     }
 
     const handleEditComment = (index) => {
@@ -81,11 +84,14 @@ function Comment({ setIsShowMessage, slug, id }) {
 
     const handleSaveEditComment = () => {
         const commentStorage = storage.get('comments', {})
+        const valueComment =
+            commentStorage[user?.email][slug][id][indexEdit].value
         commentStorage[user?.email][slug][id][indexEdit].value = valueEditComment
         storage.set('comments', commentStorage)
         setComments(commentStorage[user?.email][slug][id])
         setIndexEdit(-1)
         toast.success('Sửa bình luận thành công')
+        handleSetActivity(user, { dataChapter, valueComment, valueEditComment }, 'editComment')
     }
 
     const handleOpenDiaLog = (index) => {
