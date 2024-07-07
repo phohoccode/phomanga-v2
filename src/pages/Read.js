@@ -146,7 +146,7 @@ function Read() {
                 {!data && !dataChapter &&
                     <h4 className='text-2xl font-[600] dark:text-[#fff]'>Đang tải dữ liệu...</h4>}
                 {data && dataChapter &&
-                    <Fragment>
+                    <div className='bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)] w-full p-[16px] rounded-[8px]'>
                         <div className='flex justify-center items-center flex-col gap-[16px] dark:text-[#fff]'>
                             <h4 className='text-3xl font-[600] text-center'>
                                 {`${data?.data?.item?.name} - Chương ${dataChapter?.data?.item?.chapter_name}`}
@@ -162,7 +162,7 @@ function Read() {
                                 <a href="https://t.me/phomanga" target="_blank" rel="noopener" className='ml-[12px] underline'>phomanga-v2</a>
                             </span>
                         </div>
-                        <div className='flex gap-[8px]'>
+                        <div className='flex gap-[8px] justify-center mt-[24px]'>
                             <button
                                 onClick={handlePrevChapter}
                                 className={`select-none py-[4px] px-[12px] mobile:px-[8px] rounded-l-[8px] block text-lg transition-all hover:scale-[1.05] text-[#fff] ${currentIndex === 0 ? 'pointer-events-none bg-[rgba(16,185,129,0.48)]' : 'pointer-events-auto bg-[#10b981]'}`}
@@ -178,7 +178,7 @@ function Read() {
                                 <i className="ml-[8px] fa-solid fa-angle-right"></i>
                             </button>
                         </div>
-                    </Fragment>
+                    </div>
                 }
                 <ul className='flex flex-col'>
                     {images.map((image, index) => (
@@ -203,7 +203,7 @@ function Read() {
                         <div className='fixed z-[9999] max-w-[300px] min-w-[50px] lg:right-[32px] lg:bottom-[32px] mobile:right-[16px] mobile:bottom-[16px] flex flex-col gap-[12px] p-[16px] rounded-[16px] shadow-sm bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)]'>
                             <button
                                 onClick={() => setIsShowTools(false)}
-                                className='flex ml-auto text-2xl dark:text-[#fff] items-center justify-center w-[32px] h-[32px] rounded-full duration-300 hover:bg-[#e3e3e3] dark:hover:bg-[#636363]'>
+                                className='flex ml-auto text-2xl text-[#10b981] items-center justify-center w-[32px] h-[32px] rounded-full duration-300 hover:bg-[#e3e3e3] dark:hover:bg-[#636363]'>
                                 <i className="fa-solid fa-xmark"></i>
                             </button>
                             <button

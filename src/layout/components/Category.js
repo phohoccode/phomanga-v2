@@ -30,10 +30,10 @@ function Category({ data, setIsShowCategory, onCloseModalMobile }) {
                     <div
                         ref={modalRef}
                         className="absolute bg-[#fff] dark:bg-[#2f2f2f] shadow-custom top-[50%] translate-y-[-50%] translate-x-[-50%] left-[50%] rounded-[16px] min-w-[60%] h-auto border border-solid border-[#e3e3e3] dark:border-[#636363]">
-                        <div className="flex justify-between p-[16px] items-center border-b-[1px] border-solid border-[#e3e3e3] dark:border-[#636363]">
+                        <div className="flex justify-between p-[12px] items-center border-b-[1px] border-solid border-[#e3e3e3] dark:border-[#636363]">
                             <h4 className="text-3xl font-[600] dark:text-[#fff]">Thể loại</h4>
                             <button className="flex items-center justify-center w-[44px] h-[44px] rounded-full duration-300 hover:bg-[#e3e3e3] dark:hover:bg-[#636363]" onClick={handleCloseModal}>
-                                <i className="dark:text-[#fff] text-[30px] fa-solid fa-xmark"></i>
+                                <i className="dark:text-[#fff] text-[24px] fa-solid fa-xmark"></i>
                             </button>
                         </div>
                         <ul className="flex flex-wrap gap-[12px] p-[16px]">

@@ -46,8 +46,8 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
             className="fixed inset-0 bg-[#0000004d] min-h-[100%] animate-fade-in">
             <div ref={modalRef} className="relative w-[80%] bg-[#fff] dark:bg-[#2f2f2f] dark:text-[#fff] h-full left-0 animate-slide-in p-[16px]">
                 <div className="flex items-center justify-between absolute top-0 left-0 right-0">
-                    <button 
-                        onClick={handleSetTheme} 
+                    <button
+                        onClick={handleSetTheme}
                         className="cursor-pointer w-[60px] flex items-center justify-center h-[60px]">
                         <i className="text-[30px] fa-solid fa-circle-half-stroke"></i>
                     </button>
@@ -65,7 +65,7 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
                         className="outline-none w-full ml-[12px] bg-[#fff] color-[#000] bg-transparent"
                         placeholder="Tìm kiếm..."
                     />
-                    <NavLink className={`px-[8px] transition-all hover:color-[#10b981] ${valueSearch !== '' ? 'pointer-events-auto' : 'pointer-events-none'}`} to={`/search/${valueSearch}`}>
+                    <NavLink onClick={handleCloseModal} className={`px-[8px] transition-all hover:color-[#10b981] ${valueSearch !== '' ? 'pointer-events-auto' : 'pointer-events-none'}`} to={`/search/${valueSearch}`}>
                         <i className="text-inherit fa-solid fa-magnifying-glass"></i>
                     </NavLink>
                 </div>

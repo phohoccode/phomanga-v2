@@ -24,10 +24,6 @@ function Info() {
     const [isSort, setIsSort] = useState(false)
     const [isCollapse, setIsCollapse] = useState(true)
 
-    useEffect(() => {
-        console.log(data);
-    }, [data])
-
     const handleSetIdRecently = (chapters, comic) => {
         if (!comic && !isSort) {
             return chapters[0]?.chapter_api_data.split('/').pop()
@@ -55,10 +51,11 @@ function Info() {
             setChapters(
                 width > 1024 ? chapters.slice(0, 39) : chapters.slice(0, 14)
             )
+            console.log(handleSetIdStorage(comic));
             setIdStorage(handleSetIdStorage(comic))
             setIdRecently(handleSetIdRecently(chapters, comic))
         }
-    }, [data, params.slug])
+    }, [data, params.slug, width])
 
     useEffect(() => {
         const chapters =
@@ -140,7 +137,11 @@ function Info() {
             data?.data?.item?.chapters?.[0]?.server_data || []
         setIsSort(!isSort)
         setChapters(
-            !isCollapse ? chapters.reverse() : chapters.reverse().slice(0, 39))
+            !isCollapse ? chapters.reverse() : (
+                width > 1023 ?
+                    chapters.reverse().slice(0, 39) :
+                    chapters.reverse().slice(0, 14)
+            ))
         setValueSearchChapter('')
         isSort ?
             toast('Chương được sắp xếp tăng dần', { duration: 1000 }) :

@@ -67,7 +67,7 @@ function User() {
                 </div>
                 <div className='absolute lg:bottom-[-120px] lg:left-[80px]  mobile:left-[32px] mobile:bottom-[-80px]'>
                     <div className='relative lg:w-[164px] lg:h-[164px] mobile:w-[128px] h-[128px]'>
-                        <figure className='rounded-full overflow-hidden  bg-[#fff] flex items-center justify-center border-4 border-solid border-[#fff]'>
+                        <figure className='rounded-full overflow-hidden bg-[#fff] flex items-center w-full h-full justify-center border-4 border-solid border-[#fff]'>
                             <img src={avartar} alt={user?.name} />
                         </figure>
                         <input className='absolute opacity-0 pointer-events-none' onChange={(event) => handleUploadImage(event, 'avartar')} type='file' id='avartar' accept='image/*' />
@@ -80,7 +80,7 @@ function User() {
             </div>
             <div className='mt-[120px] flex gap-[12px] lg:flex-row mobile:flex-col mb-[24px] lg:px-[24px]'>
                 <div className='rounded-[16px] p-[16px] border border-solid border-[#e3e3e3] dark:border-[#636363] dark:text-[#fff] flex-1 h-full'>
-                    <h4 className='text-2xl font-[600]'>Giới thiệu</h4>
+                    <h4 className='lg:text-2xl mobile:text-base font-[600]'>Giới thiệu</h4>
                     <div className='mt-[12px] flex gap-[12px] items-center'>
                         <span className='font-[600] text-[#10b981]'>Tên người dùng:</span>
                         <span className='font-[600]'>{user?.name}</span>
@@ -92,13 +92,13 @@ function User() {
                 </div>
                 <div className='rounded-[16px] p-[16px] border border-solid border-[#e3e3e3] dark:border-[#636363] dark:text-[#fff] flex-[2] h-full'>
                     <div className='flex justify-between items-center mb-[16px]'>
-                        <h4 className='text-2xl font-[600]'>
+                        <h4 className='lg:text-2xl mobile:text-base font-[600]'>
                             Hoạt động gần đây ({recentActivity.length})
                         </h4>
                         {recentActivity.length > 0 &&
                             <button
                                 onClick={handleDeleteActivity}
-                                className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-base transition-all hover:scale-[1.05] bg-[#d90429] text-[#fff]'>Xoá hoạt động
+                                className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-base duration-300 hover:scale-[1.05] bg-[#d90429] text-[#fff]'>Xoá hoạt động
                             </button>}
                     </div>
                     {recentActivity.length > 0 ? (
