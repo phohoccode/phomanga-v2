@@ -1,16 +1,21 @@
-import useFetch from "../hooks/UseFetch";
-import { useParams } from "react-router-dom";
-import { comic } from "../api";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, Fragment, useContext } from "react";
-import storage, { formatDate, setScrollAuto, setScrollHidden, handleSetActivity } from '../utils'
-import { Link } from "react-router-dom";
-import ComicsSuggestions from "../layout/components/ComicsSuggestions";
 import toast from "react-hot-toast";
+
+import useFetch from "../hooks/UseFetch";
+import { comic } from "../api";
+import storage, { formatDate, setScrollAuto, setScrollHidden, handleSetActivity } from '../utils'
+import ComicsSuggestions from "../layout/components/ComicsSuggestions";
 import DiaLog from "../layout/components/Dialog";
 import Context from "../state/Context";
 
 function Info() {
-    const { width, isOpenDiaLog, setIsOpenDiaLog, setQuantityComicArchive, user } = useContext(Context)
+    const {
+        width,
+        isOpenDiaLog,
+        setIsOpenDiaLog,
+        setQuantityComicArchive,
+        user } = useContext(Context)
     const params = useParams()
     const [data] = useFetch(`${comic}/${params.slug}`)
     const [valueSearchChapter, setValueSearchChapter] = useState('')
@@ -23,6 +28,8 @@ function Info() {
     const [isSave, setIsSave] = useState(false)
     const [isSort, setIsSort] = useState(false)
     const [isCollapse, setIsCollapse] = useState(true)
+    const chapterInDesktop = 39
+    const chapterInMobile = 14
 
     const handleSetIdRecently = (chapters, comic) => {
         if (!comic && !isSort) {
@@ -43,17 +50,17 @@ function Info() {
     useEffect(() => {
         if (data) {
             const historyStorage = storage.get('history-storage', {})
-            const comic = historyStorage[params.slug]
+            const comic = historyStorage[user?.email]?.[params?.slug]
             const chapters = data?.data?.item?.chapters?.[0]?.server_data || []
             setInfoComic(data?.data?.item || [])
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
             setChapters(
-                width > 1024 ? chapters.slice(0, 39) : chapters.slice(0, 14)
+                width > 1024 ? chapters.slice(0, chapterInDesktop) : chapters.slice(0, chapterInMobile)
             )
-            console.log(handleSetIdStorage(comic));
             setIdStorage(handleSetIdStorage(comic))
             setIdRecently(handleSetIdRecently(chapters, comic))
+            console.log(chapters);
         }
     }, [data, params.slug, width])
 
@@ -64,8 +71,8 @@ function Info() {
             !isCollapse ?
                 chapters : (
                     width > 1024 ?
-                        chapters.slice(0, 39) :
-                        chapters.slice(0, 14))
+                        chapters.slice(0, chapterInDesktop) :
+                        chapters.slice(0, chapterInMobile))
         )
         setValueSearchChapter('')
     }, [isCollapse])
@@ -91,8 +98,8 @@ function Info() {
         setChapters(
             !isCollapse ? filterChapters : (
                 width > 1024 ?
-                    filterChapters.slice(0, 39) :
-                    filterChapters.slice(0, 14))
+                    filterChapters.slice(0, chapterInDesktop) :
+                    filterChapters.slice(0, chapterInMobile))
         )
     }
 
@@ -139,8 +146,8 @@ function Info() {
         setChapters(
             !isCollapse ? chapters.reverse() : (
                 width > 1023 ?
-                    chapters.reverse().slice(0, 39) :
-                    chapters.reverse().slice(0, 14)
+                    chapters.reverse().slice(0, chapterInDesktop) :
+                    chapters.reverse().slice(0, chapterInMobile)
             ))
         setValueSearchChapter('')
         isSort ?
@@ -150,7 +157,7 @@ function Info() {
 
     return (
         <Fragment>
-            {!data && <h4 className='text-2xl font-[600] dark:text-[#fff]'>Đang tải dữ liệu...</h4>}
+            {!data && <h4 className='lg:text-2xl mobile:text-xl font-[600] dark:text-[#fff]'>Đang tải dữ liệu...</h4>}
             {data &&
                 <Fragment>
                     <div className='lg:flex lg:flex-row mobile:flex-col mobile:gap-[12px] p-[16px] bg-[rgba(16,185,129,0.15)] rounded-[8px] dark:bg-[rgba(204,204,204,0.2)]'>
@@ -161,30 +168,28 @@ function Info() {
                             />
                         </figure>
                         <div className='overflow-hidden flex flex-col gap-[4px] flex-1 lg:pl-[32px]'>
-                            <h4 className="text-3xl font-[600] lg:mt-0 mobile:mt-[16px] dark:text-[#fff]">{infoComic?.name}</h4>
-                            <div className='flex gap-[12px] my-[12px]'>
+                            <h4 className="lg:text-3xl mobile:text-lg font-[600] lg:mt-0 mobile:mt-[16px] dark:text-[#fff]">{infoComic?.name}</h4>
+                            <div className='flex gap-[12px] my-[12px] select-none'>
                                 {!isSave ? (
                                     <button
                                         onClick={handleSaveComic}
-                                        className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'>
+                                        className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg duration-300 font-[600] hover:scale-[1.05] bg-[#10b981] text-[#fff]'>
                                         <i className="mr-[8px] fa-solid fa-bookmark"></i>
                                         Lưu truyện
                                     </button>
                                 ) : (
                                     <button
                                         onClick={() => setIsOpenDiaLog(true)}
-                                        className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#d90429] text-[#fff]'
+                                        className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg duration-300 font-[600] hover:scale-[1.05] bg-[#d90429] text-[#fff]'
                                     >
                                         <i className="mr-[8px] fa-solid fa-trash"></i>
                                         Xoá truyện
                                     </button>
                                 )}
-                                <button>
-                                    <Link className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#3b82f6] text-[#fff]" to={`/read/${params.slug}/${idRecently}`}>
-                                        <i className="mr-[8px] fa-regular fa-eye"></i>
-                                        Đọc tiếp
-                                    </Link>
-                                </button>
+                                <Link className={`py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg font-[600] transition-all hover:scale-[1.05] text-[#fff] ${chapters.length > 0 ? 'bg-[#3b82f6] pointer-events-auto' : 'bg-[rgba(59,131,246,0.43)] pointer-events-none cursor-none'}`} to={`/read/${params.slug}/${idRecently}`}>
+                                    <i className="mr-[8px] fa-regular fa-eye"></i>
+                                    Đọc tiếp
+                                </Link>
                             </div>
 
                             <ul className='flex gap-[12px] text-lg'>
@@ -221,7 +226,7 @@ function Info() {
 
                     <div className='mt-[32px]'>
                         <div className='flex items-center justify-between'>
-                            <h4 className="text-2xl font-[600] dark:text-[#fff]">
+                            <h4 className="lg:text-2xl mobile:text-xl font-[600] dark:text-[#fff]">
                                 <i className="mr-[8px] fa-regular fa-rectangle-list"></i>
                                 Danh sách chương
                             </h4>
@@ -238,10 +243,11 @@ function Info() {
                                     )}
                                 </button>}
                         </div>
-                        <p className="my-[12px] font-[600] dark:text-[#fff]">
-                            Gợi ý: Bạn có thể cuộn con lăn chuột để chọn chương
-                        </p>
-                        <div className='flex items-center w-full px-[12px] rounded-[8px] border-2 border-solid border-[#ccc] focus-within:border-[#10b981] mt-[12px] mb-[24px] dark:text-[#fff]'>
+                        {width > 1024 &&
+                            <p className="my-[16px] font-[600] text-[#10b981]">
+                                Gợi ý: Bạn có thể cuộn con lăn chuột để chọn chương
+                            </p>}
+                        <div className='flex items-center w-full px-[12px] rounded-[8px] border-2 border-solid border-[#ccc] focus-within:border-[#10b981] my-[12px] dark:text-[#fff]'>
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input
                                 type="number"
@@ -252,6 +258,17 @@ function Info() {
                                 onFocus={setScrollHidden}
                                 onBlur={setScrollAuto}
                             />
+                        </div>
+                        <div className="mb-[24px] flex gap-[16px] dark:text-[#fff]">
+                            <span className="font-[600]">Chú thích:</span>
+                            <div className="flex gap-[12px] items-center">
+                                <div className="w-[40px] h-[20px] rounded-[6px] bg-[#10b981]"></div>
+                                <span>Chưa đọc</span>
+                            </div>
+                            <div className="flex gap-[12px] items-center">
+                                <div className="w-[40px] h-[20px] rounded-[6px] bg-[#10b981b3]"></div>
+                                <span>Đã đọc</span>
+                            </div>
                         </div>
                         <ul className='flex flex-wrap gap-[12px]'>
                             {chapters.length > 0 ?
@@ -271,13 +288,13 @@ function Info() {
                                                 className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-sm transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] text-center"
                                                 to={`/read/${params.slug}/${chapters[chapters.length - 1]?.chapter_api_data
                                                     .split('/').pop()}`}>
-                                                Chương mới
+                                                Đọc mới nhất
                                             </Link>
                                         </li>
                                     )}
                                     {chapters.map((chapter, index) => (
                                         <li
-                                            className={` transition-all hover:scale-[1.05] rounded-[8px] lg:w-chapter-desktop mobile:w-chapter-mobile ${idStorage.includes(chapter?.chapter_api_data.split('/').pop()) ? 'bg-[#10b981b3]' : 'bg-[#10b981]'}`}
+                                            className={` transition-all hover:scale-[1.05] rounded-[8px] lg:w-chapter-desktop mobile:w-chapter-mobile relative ${idStorage.includes(chapter?.chapter_api_data.split('/').pop()) ? "bg-[#10b981b3]" : 'bg-[#10b981]'}`}
                                             key={index}>
                                             <Link
                                                 className="py-[4px] px-[12px] mobile:px-[8px]  block text-sm  text-[#fff] text-center"
@@ -293,7 +310,9 @@ function Info() {
                                 )
                             }
                         </ul>
-                        {chapters.length >= 14 &&
+                        {(width > 1024 ?
+                            chapters.length >= chapterInDesktop :
+                            chapters.length >= chapterInMobile) &&
                             <div className="flex justify-center mt-[16px] ">
                                 <span
                                     className="text-[#10b981] font-[900] cursor-pointer text-lg"
@@ -318,7 +337,7 @@ function Info() {
             {isOpenDiaLog &&
                 <DiaLog
                     onDeleteComic={handleDeleteComic}
-                    text='Truyện sẽ được xoá khỏi kho lưu trữ!'
+                    text='Truyện sẽ được xoá khỏi kho lưu trữ?'
                 />}
         </Fragment>
 

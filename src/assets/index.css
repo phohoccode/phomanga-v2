@@ -32,6 +32,11 @@ img {
   width: 100%;
 }
 
+::selection {
+    background-color: #10b981;
+    color: #fff;
+  }
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

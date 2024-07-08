@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, useContext, Fragment } from 'react'
 import toast from 'react-hot-toast'
+import { Link } from 'react-router-dom';
+
 import Context from '../../state/Context';
 import DiaLog from '../components/Dialog';
 import storage, { handleSelectedFocus, isUrlWithValidDomainSuffix, formatTime, handleSetActivity } from '../../utils'
@@ -28,7 +30,7 @@ function Comment({ setIsShowMessage, slug, id, dataChapter }) {
             wrapperRef.current.classList.add('animate-fade-out')
             setTimeout(() => {
                 setIsShowMessage(false)
-            }, 300)
+            }, 200)
         }
     }
 
@@ -132,11 +134,11 @@ function Comment({ setIsShowMessage, slug, id, dataChapter }) {
                         <ul className='flex flex-col gap-[32px] h-full'>
                             {comments.map((comment, index) => (
                                 <li className='flex gap-[16px]' key={index}>
-                                    <figure className='flex-shrink-0 border border-solid border-[#ccc] overflow-hidden rounded-full w-[50px] h-[50px]'>
+                                    <Link to='/user' className='flex-shrink-0 border border-solid border-[#ccc] overflow-hidden rounded-full w-[50px] h-[50px] hover:animate-pulse'>
                                         <img
                                             src={user?.picture}
                                             alt='avartar' />
-                                    </figure>
+                                    </Link>
                                     <div className='w-full h-full p-[12px] rounded-[8px] bg-[#f2f3f5] dark:bg-[rgba(204,204,204,0.2)]'>
                                         <div className=''>
                                             {index !== indexEdit &&
@@ -147,6 +149,7 @@ function Comment({ setIsShowMessage, slug, id, dataChapter }) {
                                                             <Fragment key={index}>{
                                                                 !isUrlWithValidDomainSuffix(cmt) ? ` ${cmt} ` : (
                                                                     <a
+                                                                        className='font-[600] text-[#10b981] hover:underline'
                                                                         href={cmt}
                                                                         target="_blank"
                                                                         rel="noopener noreferrer"
@@ -161,7 +164,7 @@ function Comment({ setIsShowMessage, slug, id, dataChapter }) {
                                             }
                                             {index === indexEdit &&
                                                 <textarea
-                                                    className='lg:p-[16px] mobile:p-[8px] min-h-[160px] w-full mb-[12px] border-2 border-solid border-[#ccc] duration-300 text-base focus:border-[#10b981] outline-none rounded-[8px] dark:text-[#000]'
+                                                    className='lg:p-[16px] mobile:p-[8px] min-h-[160px] w-full mb-[12px] border-2 border-solid border-[#ccc] duration-300 text-base focus:border-[#10b981] outline-none rounded-[8px]  dark:bg-transparent dark:text-[#fff]'
                                                     ref={commentEditRef}
                                                     value={valueEditComment}
                                                     onChange={e => setValueEditComment(e.target.value)}>

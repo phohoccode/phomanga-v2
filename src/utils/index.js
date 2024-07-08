@@ -109,15 +109,35 @@ export function handleSetActivity(user, data, type) {
             break
         }
         case 'addComment': {
-            newData = `Đã bình luận "${data?.valueComment}" tại truyện ${data?.dataChapter?.data?.item?.comic_name} - Chương ${data?.dataChapter?.data?.item?.chapter_name}`
+            const { dataChapter, valueComment } = data
+            const comicName = dataChapter?.data?.item?.comic_name
+            const chapterName = dataChapter?.data?.item?.chapter_name
+
+            newData = `Đã bình luận "${valueComment}" tại truyện ${comicName} - Chương ${chapterName}`
             break
         }
         case 'removeComment': {
-            newData = `Đã xoá bình luận "${data?.valueComment}" tại truyện ${data?.dataChapter?.data?.item?.comic_name} - Chương ${data?.dataChapter?.data?.item?.chapter_name}`
+            const { dataChapter, valueComment } = data
+            const comicName = dataChapter?.data?.item?.comic_name
+            const chapterName = dataChapter?.data?.item?.chapter_name
+
+            newData = `Đã xoá bình luận "${valueComment}" tại truyện ${comicName} - Chương ${chapterName}`
             break
         }
         case 'editComment': {
-            newData = `Đã sửa bình luận "${data?.valueComment}" thành "${data?.valueEditComment}" tại truyện ${data?.dataChapter?.data?.item?.comic_name} - Chương ${data?.dataChapter?.data?.item?.chapter_name}`
+            const { dataChapter, valueComment, valueEditComment } = data
+            const comicName = dataChapter?.data?.item?.comic_name
+            const chapterName = dataChapter?.data?.item?.chapter_name
+
+            newData = `Đã sửa bình luận "${valueComment}" thành "${valueEditComment}" tại truyện ${comicName} - Chương ${chapterName}`
+            break
+        }
+        case 'deleteChapter': {
+            const { historyStorage, slug, index } = data
+            const chapterName = historyStorage[user?.email][slug][index]?.data?.item?.chapter_name
+            const comicName = historyStorage[user?.email][slug][index]?.data?.item?.comic_name
+
+            newData = `Đã xoá chương ${chapterName} truyện ${comicName} khỏi lịch sử đã xem`
             break
         }
         default: {

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import { category } from "../../api";
 import Comics from "../components/Comics";
 
@@ -22,8 +23,8 @@ function ComicsSuggestions({ data }) {
     return (
         <div className='mt-[48px]'>
             <div className='flex justify-between items-center mb-[-32px] flex-col'>
-                <h4 className="flex-shrink-0 text-3xl font-[900] mobile:mb-[24px] dark:text-[#fff]">
-                    <i className="text-2xl mr-[8px] fa-solid fa-wand-magic-sparkles"></i>
+                <h4 className="flex-shrink-0 lg:text-3xl mobile:text-xl font-[900] mobile:mb-[24px] dark:text-[#fff]">
+                    <i className="lg:text-2xl mobile:text-xl mr-[8px] fa-solid fa-wand-magic-sparkles"></i>
                     Gợi ý dành cho bạn
                 </h4>
                 <ul className='flex items-center gap-[12px] flex-wrap'>

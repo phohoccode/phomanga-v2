@@ -1,5 +1,6 @@
-import useFetch from "../../hooks/UseFetch";
 import { useEffect, useState, useRef, useContext } from 'react'
+
+import useFetch from "../../hooks/UseFetch";
 import Slide from "./Slide";
 import Context from "../../state/Context";
 
@@ -28,7 +29,7 @@ function Slides({ api }) {
 
     const startAutoSlides = () => {
         clearInterval(idInterval.current)
-        idInterval.current = setInterval(handleNext, 6000)
+        idInterval.current = setInterval(handleNext, 7000)
     }
 
     useEffect(() => {

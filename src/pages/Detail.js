@@ -1,5 +1,6 @@
 import { Fragment, useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+
 import { detail } from '../api';
 import useFetch from '../hooks/UseFetch';
 import { scrollToTop } from '../utils';
@@ -18,7 +19,6 @@ function Detail() {
 
     useEffect(() => {
         if (data) {
-            console.log(data);
             const totalItems =
                 data?.data?.params?.pagination?.totalItems
             const totalItemsPerPage =
@@ -40,10 +40,10 @@ function Detail() {
 
     return (
         <Fragment>
-            {!data && <h4 className='text-2xl font-[600] dark:text-[#fff]'>Đang tải dữ liệu...</h4>}
+            {!data && <h4 className='lg:text-2xl mobile:text-xl font-[600] dark:text-[#fff]'>Đang tải dữ liệu...</h4>}
             {data?.status === 'success' &&
                 <Fragment>
-                    <h4 className='text-center text-2xl font-[600] text-[#10b981] mb-[32px] p-[8px] rounded-[8px] border-2 border-solid border-[#10b981] bg-[rgba(16,185,129,0.15)]'>
+                    <h4 className='text-center lg:text-2xl mobile:text-xl font-[600] text-[#10b981] dark:text-[#fff] mb-[32px] p-[8px] rounded-[8px] border-2 border-solid border-[#10b981] dark:border-[#636363] bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)]'>
                         <i className="mr-[8px] fa-solid fa-book-open"></i>
                         {data?.data?.breadCrumb?.[0]?.name} ({data?.data?.params?.pagination?.totalItems} truyện)
                     </h4>

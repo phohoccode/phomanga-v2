@@ -1,16 +1,22 @@
-import { Fragment, useContext, useRef, useState } from "react";
-import Context from "../../state/Context";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import Context from "../../state/Context";
+import { setScrollDocument } from "../../utils";
 
 function User() {
     const { user, handleLogout } = useContext(Context)
     const [isShowUser, setIsShowUser] = useState(false)
 
+    useEffect(() => {
+        setScrollDocument(isShowUser)
+    }, [isShowUser])
+
     return (
         <div className="relative">
             <figure
                 onClick={() => setIsShowUser(!isShowUser)}
-                className="w-[30px] h-[30px] rounded-full overflow-hidden cursor-pointer select-none">
+                className="border border-solid border-[#e3e3e3] dark:border-[#636363] w-[30px] h-[30px] rounded-full overflow-hidden cursor-pointer select-none">
                 <img src={user?.picture} act='logo' />
             </figure>
             {isShowUser &&
@@ -21,13 +27,13 @@ function User() {
                             <i className="fa-solid fa-xmark"></i>
                         </button>
                         <div className="flex items-center gap-[12px] px-[16px] mt-[32px]">
-                            <figure className="w-[50px] h-[50px] rounded-full overflow-hidden flex-shrink-0">
+                            <figure className="border border-solid border-[#e3e3e3] dark:border-[#636363] w-[50px] h-[50px] rounded-full overflow-hidden flex-shrink-0">
                                 <img src={user?.picture} alt={user?.name} />
                             </figure>
                             <span className="flex-1 font-[900]">{user?.name}</span>
                         </div>
                         <div className="w-full h-[1px] bg-[#e3e3e3] dark:bg-[#636363] mt-[12px]"></div>
-                        <div className="px-[16px] py-[8px]">
+                        <div className="px-[16px] py-[8px] select-none">
                             <Link
                                 className="p-[8px] block mx-[-8px] font-[600] duration-300 rounded-[8px] hover:bg-[rgba(170,170,170,0.3)]"
                                 onClick={() => setIsShowUser(false)}

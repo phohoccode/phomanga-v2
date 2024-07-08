@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
-import useFetch from "../hooks/UseFetch";
 import { useState, useEffect, Fragment, useContext } from "react";
+
+import useFetch from "../hooks/UseFetch";
 import Comic from "../layout/components/Comic";
 import { search } from "../api";
 import Pagination from "../layout/components/Pagination";
@@ -36,10 +37,10 @@ function Search() {
 
     return (
         <div className=''>
-            {!data && <h4 className='text-2xl font-[600] dark:text-[#fff]'>Đang tìm kiếm truyện phù hợp...</h4>}
+            {!data && <h4 className='lg:text-2xl mobile:text-xl font-[600] dark:text-[#fff]'>Đang tìm kiếm truyện phù hợp...</h4>}
             {data &&
                 <Fragment>
-                    <h4 className="mb-[32px] text-2xl font-[600] dark:text-[#fff]">
+                    <h4 className="mb-[32px] lg:text-2xl mobile:text-xl font-[600] dark:text-[#fff]">
                         {result.length > 0 ?
                             `Tìm kiếm được 
                                 ${data?.data?.params?.pagination?.totalItems} 

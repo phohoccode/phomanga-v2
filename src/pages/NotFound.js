@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+
 import notfound from '../assets/notfound.jpg'
 import notfound1 from '../assets/notfound.png'
-import { useContext } from 'react';
 import Context from '../state/Context';
 
 function NotFound() {

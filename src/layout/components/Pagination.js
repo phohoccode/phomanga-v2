@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react"
-import { scrollToTop } from "../../utils"
 import toast from "react-hot-toast"
+
+import { scrollToTop } from "../../utils"
 
 function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
     const [pageNumbers, setPageNumbers] = useState([])
@@ -31,8 +32,8 @@ function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
         setPageNumbers(pagination)
         console.log(pagination);
     }, [currentPage, totalPage, itemsPerPage])
-    
-    
+
+
     useEffect(() => {
         toast(`Bạn đang ở trang ${currentPage}`, { duration: 1000 })
         scrollToTop()
@@ -54,7 +55,7 @@ function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
         <div className="flex justify-center my-[64px]">
             <ul className="flex gap-[4px] flex-wrap">
                 <li
-                    onClick={() => setCurrentPage(1)} 
+                    onClick={() => setCurrentPage(1)}
                     className={`text-lg transition-all hover:bg-[#ccc] rounded-[4px] border border-solid border-[#ccc] px-[8px] py-[4px] font-[600] min-w-[40px] text-center cursor-pointer ${currentPage === 1 ? 'pointer-events-none opacity-[.4] dark:text-[#fff] dark:opacity-[1]' : 'pointer-events-auto bg-[#fff]'}`}>
                     <i className="fa-solid fa-angles-left"></i>
                 </li>
@@ -75,7 +76,7 @@ function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
                     <i className="fa-solid fa-angle-right"></i>
                 </li>
                 <li
-                    onClick={() => setCurrentPage(totalPage)}  className={`text-lg transition-all hover:bg-[#ccc] rounded-[4px] border border-solid border-[#ccc] px-[8px] py-[4px] font-[600] min-w-[40px] text-center cursor-pointer ${currentPage === totalPage ? 'pointer-events-none opacity-[.4] dark:text-[#fff] dark:opacity-[1]' : 'pointer-events-auto bg-[#fff]'}`}>
+                    onClick={() => setCurrentPage(totalPage)} className={`text-lg transition-all hover:bg-[#ccc] rounded-[4px] border border-solid border-[#ccc] px-[8px] py-[4px] font-[600] min-w-[40px] text-center cursor-pointer ${currentPage === totalPage ? 'pointer-events-none opacity-[.4] dark:text-[#fff] dark:opacity-[1]' : 'pointer-events-auto bg-[#fff]'}`}>
                     <i className="fa-solid fa-angles-right"></i>
                 </li>
             </ul>

@@ -1,5 +1,6 @@
-import { nowReleased, comicNew, completed, home, comingSoon } from '../api/'
 import { Fragment } from 'react'
+
+import { nowReleased, comicNew, completed, home, comingSoon } from '../api/'
 import Slides from '../layout/components/Slides';
 import Comics from '../layout/components/Comics';
 

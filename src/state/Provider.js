@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import Context from "./Context";
 import { googleLogout } from "@react-oauth/google";
-import storage from '../utils'
+
+import storage, { setScrollDocument } from '../utils'
+import Context from "./Context";
 
 function Provider({ children }) {
     const [width, setWidth] = useState(window.innerWidth)
@@ -57,6 +58,10 @@ function Provider({ children }) {
             document.documentElement.classList.toggle('light') :
             document.documentElement.classList.toggle('dark')
     }, [theme])
+
+    useEffect(() => {
+        setScrollDocument(isOpenDiaLog)
+    }, [isOpenDiaLog])
 
     const handleLogout = () => {
         googleLogout()

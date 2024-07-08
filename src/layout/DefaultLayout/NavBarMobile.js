@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
+
 import Category from "../components/Category";
 import Context from "../../state/Context";
 
@@ -44,8 +45,8 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
             ref={containerRef}
             onClick={handleWrapperClick}
             className="fixed inset-0 bg-[#0000004d] min-h-[100%] animate-fade-in">
-            <div ref={modalRef} className="relative w-[80%] bg-[#fff] dark:bg-[#2f2f2f] dark:text-[#fff] h-full left-0 animate-slide-in p-[16px]">
-                <div className="flex items-center justify-between absolute top-0 left-0 right-0">
+            <div ref={modalRef} className="relative w-[80%] bg-[#fff] dark:bg-[#2f2f2f] dark:text-[#fff rounded-r-[16px] h-full left-0 animate-slide-in p-[16px]">
+                <div className="flex items-center justify-between absolute top-0 left-0 right-0 dark:text-[#fff]">
                     <button
                         onClick={handleSetTheme}
                         className="cursor-pointer w-[60px] flex items-center justify-center h-[60px]">
@@ -65,7 +66,7 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
                         className="outline-none w-full ml-[12px] bg-[#fff] color-[#000] bg-transparent"
                         placeholder="Tìm kiếm..."
                     />
-                    <NavLink onClick={handleCloseModal} className={`px-[8px] transition-all hover:color-[#10b981] ${valueSearch !== '' ? 'pointer-events-auto' : 'pointer-events-none'}`} to={`/search/${valueSearch}`}>
+                    <NavLink onClick={handleCloseModal} className={`px-[8px] transition-all dark:text-[#fff] hover:text-[#10b981] ${valueSearch !== '' ? 'pointer-events-auto' : 'pointer-events-none'}`} to={`/search/${valueSearch}`}>
                         <i className="text-inherit fa-solid fa-magnifying-glass"></i>
                     </NavLink>
                 </div>
@@ -80,9 +81,11 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
                         <NavLink to='/history' className={`block text-lg hover:text-[#10b981] transition-all py-[8px] ${pathname === '/history' ? 'text-[#10b981] font-[900]' : 'text-[#000] dark:text-[#fff]'}`} >Lịch sử đã xem</NavLink>
                     </li>
                     <li>
-                        <div onClick={() => setIsShowCategory(!isShowCategory)} className="flex items-center text-lg gap-[8px] py-[8px]">
+                        <div onClick={() => setIsShowCategory(!isShowCategory)} className="flex items-center text-lg gap-[8px] py-[8px] dark:text-[#fff]">
                             <span>Thể loại</span>
-                            <i className="fa-solid fa-angle-right"></i>
+                            {!isShowCategory ? (<i className="fa-solid fa-angle-right"></i>) : (
+                                <i className="fa-solid fa-angle-down"></i>
+                            )}
                         </div>
                         {isShowCategory &&
                             <Category

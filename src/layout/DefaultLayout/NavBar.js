@@ -1,7 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+
 import logo from '../../assets/logo.png'
 import Login from "../components/Login";
-import { useContext, useEffect, useState } from "react";
 import Context from "../../state/Context";
 import User from "../components/User";
 import NavBarMobile from "./NavBarMobile";
@@ -39,7 +40,9 @@ function NavBar() {
                     <NavLink className={'flex-shrink-0 w-[40px] h-[40px] rounded-[8px] overflow-hidden'} to='/'>
                         <img className="" src={logo} />
                     </NavLink>}
-                <h4 className="text-2xl text-[#10b981] font-[900]">PHOMANGA-V2</h4>
+                <NavLink to='/' className="text-2xl text-[#10b981] font-[900]">
+                    PHOMANGA-V2
+                </NavLink>
             </div>
             {width > 1024 &&
                 <div className="h-[40px] flex items-center p-[4px] border-2 border-solid border-[#ccc] dark:border-[#636363] rounded-[8px] ml-[12px] w-[420px] focus-within:border-[#10b981] shadow-sm hover:border-[rgb(16,185,129)] dark:hover:border-[#808080] dark:focus-within:border-[#808080]">
@@ -81,7 +84,7 @@ export default NavBar;
 
 const Light = ({ setTheme }) => {
     return (
-        <svg onClick={() => setTheme('dark')} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[30px] h-[30px] mr-[12px] cursor-pointer"><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" className=" stroke-[#000]"></path><path d="M12 4v1M17.66 6.344l-.828.828M20.005 12.004h-1M17.66 17.664l-.828-.828M12 20.01V19M6.34 17.664l.835-.836M3.995 12.004h1.01M6 6l.835.836" className="stroke-[#000] dark:stroke-[#fff]"></path></svg>
+        <svg onClick={() => setTheme('dark')} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[30px] h-[30px] mr-[12px] cursor-pointer"><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" className="stroke-[#000]"></path><path d="M12 4v1M17.66 6.344l-.828.828M20.005 12.004h-1M17.66 17.664l-.828-.828M12 20.01V19M6.34 17.664l.835-.836M3.995 12.004h1.01M6 6l.835.836" className="stroke-[#000] dark:stroke-[#fff]"></path></svg>
     )
 }
 

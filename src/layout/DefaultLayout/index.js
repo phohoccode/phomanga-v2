@@ -1,10 +1,11 @@
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
 import SideBar from "./SideBar";
 import NavBar from "./NavBar";
-import { Fragment, useContext, useEffect, useState } from "react";
 import Context from "../../state/Context";
-import { useParams } from "react-router-dom";
 import { scrollToTop } from "../../utils";
-import { Toaster } from "react-hot-toast";
 import Footer from "../DefaultLayout/Footer";
 
 function DefaultLayout({ children }) {

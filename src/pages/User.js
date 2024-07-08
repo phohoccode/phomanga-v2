@@ -1,10 +1,12 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
-import Context from '../state/Context';
-import storage, { formatTime, handleSetActivity } from '../utils'
 import toast from 'react-hot-toast';
 
+import Context from '../state/Context';
+import storage, { formatTime, handleSetActivity } from '../utils'
+import DiaLog from '../layout/components/Dialog';
+
 function User() {
-    const { user, setUser } = useContext(Context)
+    const { user, setUser, setIsOpenDiaLog, isOpenDiaLog } = useContext(Context)
     const [avartar, setAvartar] = useState(user?.picture)
     const [background, setBackground] = useState(user?.background)
     const [recentActivity, setRecentActivity] = useState(() => {
@@ -17,7 +19,7 @@ function User() {
         setBackground(user?.background)
         setRecentActivity(() => {
             const recentActivity = storage.get('recent-activity', {})
-            return recentActivity?.[user?.email] || []
+            return recentActivity?.[user?.email]?.reverse() || []
         })
     }, [user])
 
@@ -75,7 +77,7 @@ function User() {
                             <i className="fa-solid fa-camera"></i>
                         </label>
                     </div>
-                    <h4 className='inline-block text-2xl font-[900] lg:mb-[24px] dark:text-[#fff]'>{user?.name}</h4>
+                    <h4 className='text-center block text-2xl mt-[12px] font-[900] lg:mb-[24px] dark:text-[#fff]'>{user?.name}</h4>
                 </div>
             </div>
             <div className='mt-[120px] flex gap-[12px] lg:flex-row mobile:flex-col mb-[24px] lg:px-[24px]'>
@@ -97,17 +99,17 @@ function User() {
                         </h4>
                         {recentActivity.length > 0 &&
                             <button
-                                onClick={handleDeleteActivity}
+                                onClick={() => setIsOpenDiaLog(true)}
                                 className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-base duration-300 hover:scale-[1.05] bg-[#d90429] text-[#fff]'>Xoá hoạt động
                             </button>}
                     </div>
                     {recentActivity.length > 0 ? (
                         <ul className='flex flex-col gap-[8px]'>
-                            {recentActivity.reverse().map((activity, index) => (
+                            {recentActivity.map((activity, index) => (
                                 <li key={index} className='flex gap-[12px] items-center'>
                                     <p>{activity?.value}</p>
                                     <span>·</span>
-                                    <span className='text-sm text-[#969696]'>{formatTime(activity?.time)}</span>
+                                    <span className='text-sm whitespace-nowrap text-[#969696]'>{formatTime(activity?.time)}</span>
                                 </li>
                             ))}
                         </ul>) : (
@@ -115,6 +117,13 @@ function User() {
                     )}
                 </div>
             </div>
+
+            {isOpenDiaLog && 
+                <DiaLog
+                    onleDeleteActivity={handleDeleteActivity}
+                    text='Hoạt động gần đây sẽ bị xoá vĩnh viễn?'
+                />
+            }
         </Fragment>
     );
 }

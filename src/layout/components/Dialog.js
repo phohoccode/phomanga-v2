@@ -1,4 +1,5 @@
 import { useContext, useRef } from "react";
+
 import Context from "../../state/Context";
 
 function DiaLog(props) {
@@ -9,6 +10,7 @@ function DiaLog(props) {
         props.onDeleteComment?.()
         props.onDeleteAll?.()
         props.onDeleteComic?.()
+        props.onleDeleteActivity?.()
         setIsOpenDiaLog(false)
     }
 

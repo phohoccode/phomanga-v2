@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext, Fragment } from "react";
+import toast from "react-hot-toast";
+
 import Context from "../state/Context";
 import storage, { setScrollDocument, handleSetActivity } from '../utils'
-import toast from "react-hot-toast";
 import Comic from "../layout/components/Comic";
 import DiaLog from "../layout/components/Dialog";
 
@@ -43,7 +44,7 @@ function Archive() {
                     </h4>
                     {comics.length > 0 &&
                         <button
-                            className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#d90429] text-[#fff]'
+                            className='py-[4px] px-[12px] font-[600] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#d90429] text-[#fff]'
                             onClick={() => setIsOpenDiaLog(true)}>
                             Xoá tất cả
                         </button>
@@ -58,7 +59,7 @@ function Archive() {
             {isOpenDiaLog &&
                 <DiaLog
                     onDeleteAll={handleDeleteAll}
-                    text='Tất cả truyện trong kho lưu trữ sẽ bị xoá vĩnh viễn!'
+                    text='Tất cả truyện trong kho lưu trữ sẽ bị xoá vĩnh viễn?'
                 />
             }
         </Fragment>

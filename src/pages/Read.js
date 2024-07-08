@@ -1,7 +1,8 @@
 import { useState, useEffect, Fragment, useContext, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import useFetch from '../hooks/UseFetch';
 import toast from 'react-hot-toast';
+
+import useFetch from '../hooks/UseFetch';
 import storage, { setScrollDocument, scrollToBottom, scrollToTop, handleSetActivity } from '../utils'
 import Comment from '../layout/components/Comment';
 import Context from '../state/Context';
@@ -39,7 +40,6 @@ function Read() {
 
     useEffect(() => {
         if (dataChapter) {
-            console.log(dataChapter);
             setImages(dataChapter?.data?.item?.chapter_image || [])
             setChapterPath(dataChapter?.data?.item?.chapter_path)
 
@@ -148,7 +148,7 @@ function Read() {
                 {data && dataChapter &&
                     <div className='bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)] w-full p-[16px] rounded-[8px]'>
                         <div className='flex justify-center items-center flex-col gap-[16px] dark:text-[#fff]'>
-                            <h4 className='text-3xl font-[600] text-center'>
+                            <h4 className='lg:text-3xl mobile:text-xl font-[600] text-center'>
                                 {`${data?.data?.item?.name} - Chương ${dataChapter?.data?.item?.chapter_name}`}
                             </h4>
                             {width > 1023 &&
@@ -189,64 +189,61 @@ function Read() {
                         </li>
                     ))}
                 </ul>
-                {!isShowTools ? (
-                    <button
-                        onClick={() => setIsShowTools(true)}
-                        className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] fixed lg:bottom-[32px] lg:right-[32px] mobile:right-[16px] mobile:bottom-[16px]'>
-                        <i className="mr-[8px] fa-solid fa-screwdriver-wrench"></i>
-                        Hộp công cụ
-                    </button>
-
-                ) : (
+                {data && dataChapter &&
                     <Fragment>
-                        <div onClick={() => setIsShowTools(false)} className='fixed inset-0 z-[9998]'></div>
-                        <div className='fixed z-[9999] max-w-[300px] min-w-[50px] lg:right-[32px] lg:bottom-[32px] mobile:right-[16px] mobile:bottom-[16px] flex flex-col gap-[12px] p-[16px] rounded-[16px] shadow-sm bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)]'>
+                        {!isShowTools ? (
                             <button
-                                onClick={() => setIsShowTools(false)}
-                                className='flex ml-auto text-2xl text-[#10b981] items-center justify-center w-[32px] h-[32px] rounded-full duration-300 hover:bg-[#e3e3e3] dark:hover:bg-[#636363]'>
-                                <i className="fa-solid fa-xmark"></i>
+                                onClick={() => setIsShowTools(true)}
+                                className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] fixed lg:bottom-[32px] lg:right-[32px] mobile:right-[16px] mobile:bottom-[16px]'>
+                                <i className="mr-[8px] fa-solid fa-screwdriver-wrench"></i>
+                                Hộp công cụ
                             </button>
-                            <button
-                                onClick={handlePrevChapter}
-                                className={`select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] text-[#fff] ${currentIndex === 0 ? 'pointer-events-none bg-[rgba(16,185,129,0.48)]' : 'pointer-events-auto bg-[#10b981]'}`}
-                            >
-                                <i className="mr-[8px] fa-solid fa-angle-left"></i>
-                                Chương trước
-                            </button>
-                            <button
-                                onClick={handleNextChapter}
-                                className={`select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] text-[#fff] ${currentIndex === chapter.length - 1 ? 'pointer-events-none bg-[rgba(16,185,129,0.48)]' : 'pointer-events-auto bg-[#10b981]'}`}
-                            >
-                                Chương sau
-                                <i className="ml-[8px] fa-solid fa-angle-right"></i>
-                            </button>
-                            <button
-                                className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'
-                                onClick={handleOpenModal}>
-                                <i className="mr-[8px] fa-regular fa-comment-dots"></i>
-                                <span>Bình luận</span>
-                            </button>
-                            <button
-                                className={`select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] ${isScroll && 'animate-pulse'}`}
-                                onClick={handleScroll}>
-                                <i className="mr-[8px] fa-solid fa-robot"></i>
-                                {!isScroll ? (<span>Tự động cuộn</span>) : (<span>Đang cuộn</span>)}
-                            </button>
-                            <button
-                                className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'
-                                onClick={scrollToTop}>
-                                <i className="mr-[8px] fa-solid fa-arrow-up"></i>
-                                <span>Cuộn đầu trang</span>
-                            </button>
-                            <button
-                                className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'
-                                onClick={scrollToBottom}>
-                                <i className="mr-[8px] fa-solid fa-arrow-down"></i>
-                                <span>Cuộn cuối trang</span>
-                            </button>
-                        </div>
-                    </Fragment>
-                )}
+                        ) : (
+                            <Fragment>
+                                <div onClick={() => setIsShowTools(false)} className='fixed inset-0 z-[9998]'></div>
+                                <div className='fixed z-[9999] max-w-[300px] min-w-[50px] lg:right-[32px] lg:bottom-[32px] mobile:right-[16px] mobile:bottom-[16px] flex flex-col gap-[12px] lg:p-[16px] mobile:p-[8px] rounded-[16px] shadow-sm bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)]'>
+                                    <button
+                                        onClick={handlePrevChapter}
+                                        className={`select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] text-[#fff] ${currentIndex === 0 ? 'pointer-events-none bg-[rgba(16,185,129,0.48)]' : 'pointer-events-auto bg-[#10b981]'}`}
+                                    >
+                                        <i className="mr-[8px] fa-solid fa-angle-left"></i>
+                                        Chương trước
+                                    </button>
+                                    <button
+                                        onClick={handleNextChapter}
+                                        className={`select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] text-[#fff] ${currentIndex === chapter.length - 1 ? 'pointer-events-none bg-[rgba(16,185,129,0.48)]' : 'pointer-events-auto bg-[#10b981]'}`}
+                                    >
+                                        Chương sau
+                                        <i className="ml-[8px] fa-solid fa-angle-right"></i>
+                                    </button>
+                                    <button
+                                        className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'
+                                        onClick={handleOpenModal}>
+                                        <i className="mr-[8px] fa-regular fa-comment-dots"></i>
+                                        <span>Bình luận</span>
+                                    </button>
+                                    <button
+                                        className={`select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] ${isScroll && 'animate-pulse'}`}
+                                        onClick={handleScroll}>
+                                        <i className="mr-[8px] fa-solid fa-robot"></i>
+                                        {!isScroll ? (<span>Tự động cuộn</span>) : (<span>Đang cuộn</span>)}
+                                    </button>
+                                    <button
+                                        className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'
+                                        onClick={scrollToTop}>
+                                        <i className="mr-[8px] fa-solid fa-arrow-up"></i>
+                                        <span>Cuộn đầu trang</span>
+                                    </button>
+                                    <button
+                                        className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff]'
+                                        onClick={scrollToBottom}>
+                                        <i className="mr-[8px] fa-solid fa-arrow-down"></i>
+                                        <span>Cuộn cuối trang</span>
+                                    </button>
+                                </div>
+                            </Fragment>
+                        )}
+                    </Fragment>}
             </div>
             {isShowMessage &&
                 <Comment

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import classNames from "classnames";
+
 import Category from "../components/Category";
 import useFetch from '../../hooks/UseFetch'
 import { category } from "../../api";
@@ -65,7 +65,7 @@ function SideBar() {
                         </div>}
                 </li>
                 <li onClick={() => setIsShowCategory(true)}>
-                    <div className={classNames('cursor-pointer flex flex-col items-center justify-center w-[80px] h-[80px] rounded-[16px] overflow-hidden hover:bg-[#e8ebed] dark:hover:bg-[rgba(204,204,204,0.2)] dark:hover:text-[#fff] select-none bg-[#fff] dark:bg-transparent dark:text-[#fff] gap-[8px]')}>
+                    <div className='cursor-pointer flex flex-col items-center justify-center w-[80px] h-[80px] rounded-[16px] overflow-hidden hover:bg-[#e8ebed] dark:hover:bg-[rgba(204,204,204,0.2)] dark:hover:text-[#fff] select-none bg-[#fff] dark:bg-transparent dark:text-[#fff] gap-[8px]'>
                         <i className="text-[20px] fa-solid fa-table-cells-large"></i>
                         <span className="text-xs font-[500]">Thể loại</span>
                     </div>
