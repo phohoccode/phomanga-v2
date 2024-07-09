@@ -23,7 +23,7 @@ function Slide({ data }) {
                     <div className="w-full flex gap-[32px] absolute z-[2] lg:left-[64px] left-[16px]">
                         {width > 1024 &&
                             <figure className="w-[180px] h-[250px] rounded-[8px] overflow-hidden">
-                                <img src={`https://otruyenapi.com/uploads/comics/${data?.thumb_url}`}
+                                <img loading="lazy" src={`https://otruyenapi.com/uploads/comics/${data?.thumb_url}`}
                                     alt={data?.chaptersLatest?.[0]?.chapter_name} />
                             </figure>}
                         <div className="lg:w-desktop w-mobile mobile:mt-[16px]">

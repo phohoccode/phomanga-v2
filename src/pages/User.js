@@ -106,7 +106,7 @@ function User() {
                     {recentActivity.length > 0 ? (
                         <ul className='flex flex-col gap-[8px]'>
                             {recentActivity.map((activity, index) => (
-                                <li key={index} className='flex gap-[12px] items-center'>
+                                <li key={index} className='flex gap-[12px] items-center break-word'>
                                     <p>{activity?.value}</p>
                                     <span>·</span>
                                     <span className='text-sm whitespace-nowrap text-[#969696]'>{formatTime(activity?.time)}</span>

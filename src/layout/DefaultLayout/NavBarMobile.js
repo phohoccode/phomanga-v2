@@ -63,7 +63,7 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
                         value={valueSearch}
                         onChange={e => setValueSearch(e.target.value)}
                         onKeyDown={(e) => handleSearch(e, valueSearch)}
-                        className="outline-none w-full ml-[12px] bg-[#fff] color-[#000] bg-transparent"
+                        className="outline-none w-full ml-[12px] bg-[#fff] dark:text-[#fff] bg-transparent"
                         placeholder="Tìm kiếm..."
                     />
                     <NavLink onClick={handleCloseModal} className={`px-[8px] transition-all dark:text-[#fff] hover:text-[#10b981] ${valueSearch !== '' ? 'pointer-events-auto' : 'pointer-events-none'}`} to={`/search/${valueSearch}`}>

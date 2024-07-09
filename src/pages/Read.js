@@ -33,6 +33,7 @@ function Read() {
                 data?.data?.item?.chapters[0]?.server_data.map(
                     chapter => chapter?.chapter_api_data.split('/').pop()) || []
             const index = chaptersId.findIndex(id => id === params.id)
+            console.log(data);
             setChapter(chaptersId)
             setCurrentIndex(index)
         }
@@ -158,7 +159,7 @@ function Read() {
                                     <i className="mx-[4px] fa-solid fa-arrow-right"></i> từ bàn phím để chuyển chương.
                                     <i className="mx-[4px] fa-solid fa-arrow-down"></i> để tự động cuộn trang sau 6 giây.
                                 </p>}
-                            <span className='text-lg font-[600] text-center text-[#d90429]'>Nếu truyện bị lỗi vui lòng liên hệ qua Telegram:
+                            <span className='text-lg font-[600] text-center text-[#d90429] dark:text-[#fff]'>Nếu truyện bị lỗi vui lòng liên hệ qua Telegram:
                                 <a href="https://t.me/phomanga" target="_blank" rel="noopener" className='ml-[12px] underline'>phomanga-v2</a>
                             </span>
                         </div>
@@ -185,7 +186,10 @@ function Read() {
                         <li
                             className='lg:w-[800px] h-full mobile:w-full'
                             key={index}>
-                            <img src={`https://sv1.otruyencdn.com/${chapterPath}/${image.image_file}`} alt='' />
+                            <img
+                                loading='lazy'
+                                src={`https://sv1.otruyencdn.com/${chapterPath}/${image.image_file}`}
+                                alt='image' />
                         </li>
                     ))}
                 </ul>
@@ -202,6 +206,19 @@ function Read() {
                             <Fragment>
                                 <div onClick={() => setIsShowTools(false)} className='fixed inset-0 z-[9998]'></div>
                                 <div className='fixed z-[9999] max-w-[300px] min-w-[50px] lg:right-[32px] lg:bottom-[32px] mobile:right-[16px] mobile:bottom-[16px] flex flex-col gap-[12px] lg:p-[16px] mobile:p-[8px] rounded-[16px] shadow-sm bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)]'>
+                                    <select
+                                        onChange={(event) => handleChangeChapter(event.target.selectedIndex)}
+                                        className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg bg-[#10b981] text-[#fff] outline-none cursor-pointer'>
+                                        {data?.data?.item?.chapters?.[0]?.server_data?.map((chapter, index) => (
+                                            <option
+                                                selected={params?.id === chapter?.chapter_api_data.split('/').pop()}
+                                                className='bg-[#fff] text-[#000] text-lg'
+                                                key={index}
+                                                value={chapter?.chapter_api_data.split('/').pop()}>
+                                                Chương {chapter?.chapter_name}
+                                            </option>
+                                        ))}
+                                    </select>
                                     <button
                                         onClick={handlePrevChapter}
                                         className={`select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] text-[#fff] ${currentIndex === 0 ? 'pointer-events-none bg-[rgba(16,185,129,0.48)]' : 'pointer-events-auto bg-[#10b981]'}`}

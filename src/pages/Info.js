@@ -56,7 +56,9 @@ function Info() {
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
             setChapters(
-                width > 1024 ? chapters.slice(0, chapterInDesktop) : chapters.slice(0, chapterInMobile)
+                width > 1024 ? 
+                    chapters.slice(0, chapterInDesktop) : 
+                    chapters.slice(0, chapterInMobile)
             )
             setIdStorage(handleSetIdStorage(comic))
             setIdRecently(handleSetIdRecently(chapters, comic))

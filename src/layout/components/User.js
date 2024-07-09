@@ -17,7 +17,7 @@ function User() {
             <figure
                 onClick={() => setIsShowUser(!isShowUser)}
                 className="border border-solid border-[#e3e3e3] dark:border-[#636363] w-[30px] h-[30px] rounded-full overflow-hidden cursor-pointer select-none">
-                <img src={user?.picture} act='logo' />
+                <img src={user?.picture} alt='logo' />
             </figure>
             {isShowUser &&
                 <Fragment>

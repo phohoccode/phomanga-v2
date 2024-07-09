@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Context from '../../state/Context';
 import DiaLog from '../components/Dialog';
-import storage, { handleSelectedFocus, isUrlWithValidDomainSuffix, formatTime, handleSetActivity } from '../../utils'
+import storage, { handleSelectedFocus, isUrlWithValidDomainSuffix, formatTime, handleSetActivity, setScrollAuto } from '../../utils'
 
 function Comment({ setIsShowMessage, slug, id, dataChapter }) {
     const { setIsOpenDiaLog, isOpenDiaLog, user } = useContext(Context)
@@ -134,7 +134,10 @@ function Comment({ setIsShowMessage, slug, id, dataChapter }) {
                         <ul className='flex flex-col gap-[32px] h-full'>
                             {comments.map((comment, index) => (
                                 <li className='flex gap-[16px]' key={index}>
-                                    <Link to='/user' className='flex-shrink-0 border border-solid border-[#ccc] overflow-hidden rounded-full w-[50px] h-[50px] hover:animate-pulse'>
+                                    <Link
+                                        onClick={setScrollAuto}
+                                        to='/user'
+                                        className='flex-shrink-0 border border-solid border-[#ccc] overflow-hidden rounded-full w-[50px] h-[50px] hover:animate-pulse'>
                                         <img
                                             src={user?.picture}
                                             alt='avartar' />

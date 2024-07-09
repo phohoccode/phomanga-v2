@@ -87,6 +87,7 @@ function History() {
                                     <Link to={`/read/${slug}/${comic?.data?.item?._id}`}>
                                         <figure className="h-[260px] rounded-[8px] overflow-hidden transition-all border border-solid border-[#e2e2e2] group-hover:hover:shadow-comic select-none hover:animate-pulse">
                                             <img
+                                                loading="lazy"
                                                 src={`https://sv1.otruyencdn.com/${comic?.data?.item?.chapter_path}/${comic?.data?.item?.chapter_image[index]?.image_file}`}
                                                 alt={comic?.data?.item?.comic_name}
                                             />
