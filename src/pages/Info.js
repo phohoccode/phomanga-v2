@@ -193,10 +193,10 @@ function Info() {
                                 </Link>
                             </div>
 
-                            <ul className='flex gap-[12px] text-lg'>
+                            <ul className='flex gap-[12px] text-lg flex-wrap'>
                                 <b className="text-[#10b981]">Tác giả: </b>
                                 {author.map((author, index) => (
-                                    <li className='dark:text-[#fff]' key={index}>
+                                    <li className='dark:text-[#fff] ' key={index}>
                                         {author || 'Chưa cập nhật'}
                                     </li>
                                 ))}
