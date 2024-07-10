@@ -36,7 +36,7 @@ function Archive() {
         <Fragment>
             <div className=''>
                 <div className='flex items-center justify-between mb-[24px]'>
-                    <h4 className="text-2xl font-[600] dark:text-[#fff]">
+                    <h4 className="lg:text-2xl mobile:text-xl font-[600] dark:text-[#fff]">
                         <i className="mr-[8px] fa-regular fa-bookmark"></i>
                         {comics.length > 0 ?
                             `Kho lưu trữ (${comics.length})` :
@@ -44,7 +44,7 @@ function Archive() {
                     </h4>
                     {comics.length > 0 &&
                         <button
-                            className='py-[4px] px-[12px] font-[600] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] bg-[#d90429] text-[#fff]'
+                            className='py-[4px] px-[12px] font-[600] mobile:px-[8px] rounded-[8px] block text-base transition-all hover:scale-[1.05] bg-[#d90429] text-[#fff]'
                             onClick={() => setIsOpenDiaLog(true)}>
                             Xoá tất cả
                         </button>

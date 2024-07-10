@@ -70,7 +70,7 @@ function History() {
                     </h4>
                     {slugs.length > 0 &&
                         <button
-                            className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg transition-all hover:scale-[1.05] font-[600] bg-[#d90429] text-[#fff]'
+                            className='py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-base transition-all hover:scale-[1.05] font-[600] bg-[#d90429] text-[#fff]'
                             onClick={() => setIsOpenDiaLog(true)}>
                             Xoá tất cả
                         </button>
@@ -85,7 +85,7 @@ function History() {
                             {comics?.[slug]?.map((comic, index) => (
                                 <li key={index} className='lg:w-[12.5%] md:w-[16.66667%] sm:w-[25%] mobile:w-[50%] flex-shrink-0 px-[8px] transition-all relative overflow-hidden group hover:translate-y-[-8px] duration-300'>
                                     <Link to={`/read/${slug}/${comic?.data?.item?._id}`}>
-                                        <figure className="h-[260px] rounded-[8px] overflow-hidden transition-all border border-solid border-[#e2e2e2] group-hover:hover:shadow-comic select-none hover:animate-pulse">
+                                        <figure className="h-[260px] rounded-[8px] overflow-hidden transition-all border border-solid border-[#e3e3e3] dark:border-[#636363] group-hover:hover:shadow-comic select-none hover:animate-pulse">
                                             <img
                                                 loading="lazy"
                                                 src={`https://sv1.otruyencdn.com/${comic?.data?.item?.chapter_path}/${comic?.data?.item?.chapter_image[index]?.image_file}`}
@@ -98,7 +98,7 @@ function History() {
                                     </Link>
                                     <button
                                         title="Xoá chương khỏi lịch sử xem"
-                                        onClick={() => handleDeleteComicOutHistory(slug, index)} className="absolute top-0 right-[8px] text-base py-[4px] px-[8px] bg-[rgba(16,185,129,1)] text-[#fff] rounded-bl-[8px] rounded-tr-[8px] duration-300 hover:px-[16px] hover:py-[12px] hover:text-xl">
+                                        onClick={() => handleDeleteComicOutHistory(slug, index)} className="absolute top-0 right-[8px] text-base py-[6px] px-[12px] bg-[rgba(16,185,129,1)] text-[#fff] rounded-bl-[8px] rounded-tr-[8px] duration-300 hover:px-[16px] hover:py-[12px] hover:text-xl">
                                         <i className="fa-solid fa-xmark"></i>
                                     </button>
                                 </li>

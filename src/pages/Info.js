@@ -56,13 +56,12 @@ function Info() {
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
             setChapters(
-                width > 1024 ? 
-                    chapters.slice(0, chapterInDesktop) : 
+                width > 1024 ?
+                    chapters.slice(0, chapterInDesktop) :
                     chapters.slice(0, chapterInMobile)
             )
             setIdStorage(handleSetIdStorage(comic))
             setIdRecently(handleSetIdRecently(chapters, comic))
-            console.log(chapters);
         }
     }, [data, params.slug, width])
 
@@ -279,7 +278,7 @@ function Info() {
                                         <li className="lg:w-chapter-desktop mobile:w-chapter-mobile">
                                             <Link
                                                 className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-sm transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] text-center"
-                                                to={`/read/${params.slug}/${chapters[chapters.length - 1]?.chapter_api_data
+                                                to={`/read/${params.slug}/${data?.data?.item?.chapters?.[0]?.server_data[data?.data?.item?.chapters?.[0]?.server_data.length - 1]?.chapter_api_data
                                                     .split('/').pop()}`}>
                                                 Đọc từ đầu
                                             </Link>
@@ -288,7 +287,7 @@ function Info() {
                                         <li className='lg:w-chapter-desktop mobile:w-chapter-mobile'>
                                             <Link
                                                 className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-sm transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] text-center"
-                                                to={`/read/${params.slug}/${chapters[chapters.length - 1]?.chapter_api_data
+                                                to={`/read/${params.slug}/${data?.data?.item?.chapters?.[0]?.server_data[data?.data?.item?.chapters?.[0]?.server_data.length - 1]?.chapter_api_data
                                                     .split('/').pop()}`}>
                                                 Đọc mới nhất
                                             </Link>

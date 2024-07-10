@@ -15,7 +15,7 @@ function Comics({ api }) {
     return (
         <div className="mt-[64px]">
             {data &&
-                <div className="flex justify-between items-center mb-[24px] lg:p-[16px] mobile:p-[8px] rounded-[8px] bg-[rgba(16,185,129,0.2)] text-[#10b981] dark:bg-[rgba(204,204,204,0.2)] dark:text-[#fff]">
+                <div className="flex justify-between items-center mb-[24px] mobile:p-[8px] text-[#10b981] dark:text-[#fff] p-[8px] rounded-[8px] border-2 border-solid border-[#10b981] dark:border-[#636363] bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)]">
                     <h4 className="lg:text-2xl font-[900] mobile:text-lg mr-[12px]">
                         <i className="mr-[8px] fa-solid fa-book-open"></i>
                         {data?.data?.titlePage}

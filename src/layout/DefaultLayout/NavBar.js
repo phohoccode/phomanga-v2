@@ -58,7 +58,7 @@ function NavBar() {
                             <i className="fa-solid fa-xmark p-[8px]"></i>
                         </button>}
                     <NavLink
-                        className={`px-[8px] transition-all hover:text-[#10b981] dark:text-[#fff] ${valueSearch !== '' ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                        className={`px-[8px] dark:text-[#fff] ${valueSearch !== '' ? 'pointer-events-auto' : 'pointer-events-none'}`}
                         to={`/search/${valueSearch}`}>
                         <i className="text-inherit fa-solid fa-magnifying-glass"></i>
                     </NavLink>

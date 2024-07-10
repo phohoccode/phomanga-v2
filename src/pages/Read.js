@@ -12,10 +12,11 @@ function Read() {
     const { setQuantityComicHistory, width, isLogin, user } = useContext(Context)
     const navigate = useNavigate()
     const params = useParams()
-    const [data] = useFetch(`${comic}/${params.slug}`)
-    const [dataChapter] = useFetch(`${comicImage}/${params.id}`)
+    const [data] = useFetch(`${comic}/${params?.slug}`)
+    const [dataChapter] = useFetch(`${comicImage}/${params?.id}`)
     const [images, setImages] = useState([])
     const [chapter, setChapter] = useState([])
+    const [selectedChapter, setSelectedChapter] = useState(params?.id);
     const [chapterPath, setChapterPath] = useState('')
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isScroll, setIsScroll] = useState(false)
@@ -33,7 +34,6 @@ function Read() {
                 data?.data?.item?.chapters[0]?.server_data.map(
                     chapter => chapter?.chapter_api_data.split('/').pop()) || []
             const index = chaptersId.findIndex(id => id === params.id)
-            console.log(data);
             setChapter(chaptersId)
             setCurrentIndex(index)
         }
@@ -109,6 +109,11 @@ function Read() {
     const handleChangeChapter = (index) => {
         setCurrentIndex(index)
         navigate(`/read/${params.slug}/${chapter[index]}`)
+    }
+
+    const handleChangeSelectedChapter = (event) => {
+        setSelectedChapter(event.target.value)
+        handleChangeChapter(event.target.selectedIndex)
     }
 
     const handlePrevChapter = () => {
@@ -205,14 +210,14 @@ function Read() {
                         ) : (
                             <Fragment>
                                 <div onClick={() => setIsShowTools(false)} className='fixed inset-0 z-[9998]'></div>
-                                <div className='fixed z-[9999] max-w-[300px] min-w-[50px] lg:right-[32px] lg:bottom-[32px] mobile:right-[16px] mobile:bottom-[16px] flex flex-col gap-[12px] lg:p-[16px] mobile:p-[8px] rounded-[16px] shadow-sm bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)]'>
+                                <div className='fixed z-[9999] max-w-[300px] min-w-[50px] lg:right-[32px] lg:bottom-[32px] mobile:right-[16px] mobile:bottom-[16px] flex flex-col gap-[12px] lg:p-[16px] mobile:p-[8px] rounded-[16px] shadow-sm bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,.2)]'>
                                     <select
-                                        onChange={(event) => handleChangeChapter(event.target.selectedIndex)}
-                                        className='select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg bg-[#10b981] text-[#fff] outline-none cursor-pointer'>
+                                        value={selectedChapter}
+                                        onChange={(event) => handleChangeSelectedChapter(event)}
+                                        className='min-h-[36px] select-none py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-lg bg-[#10b981] text-[#fff] outline-none cursor-pointer'>
                                         {data?.data?.item?.chapters?.[0]?.server_data?.map((chapter, index) => (
                                             <option
-                                                selected={params?.id === chapter?.chapter_api_data.split('/').pop()}
-                                                className='bg-[#fff] text-[#000] text-lg'
+                                                className='bg-[#fff] text-[#000] cursor-pointer text-lg'
                                                 key={index}
                                                 value={chapter?.chapter_api_data.split('/').pop()}>
                                                 Chương {chapter?.chapter_name}

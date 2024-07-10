@@ -40,7 +40,7 @@ function Search() {
             {!data && <h4 className='lg:text-2xl mobile:text-xl font-[600] dark:text-[#fff]'>Đang tìm kiếm truyện phù hợp...</h4>}
             {data &&
                 <Fragment>
-                    <h4 className="mb-[32px] lg:text-2xl mobile:text-xl font-[600] dark:text-[#fff]">
+                    <h4 className="mb-[32px] lg:text-2xl mobile:text-xl font-[600] text-[#10b981] dark:text-[#fff] p-[8px] rounded-[8px] border-2 border-solid border-[#10b981] dark:border-[#636363] bg-[rgba(16,185,129,0.15)] dark:bg-[rgba(204,204,204,0.2)]">
                         {result.length > 0 ?
                             `Tìm kiếm được 
                                 ${data?.data?.params?.pagination?.totalItems} 
