@@ -3,7 +3,7 @@ import toast from "react-hot-toast"
 import { Link } from "react-router-dom"
 
 import Context from "../state/Context"
-import storage, { setScrollDocument, handleSetActivity } from '../utils'
+import storage, { handleSetActivity } from '../utils'
 import DiaLog from "../layout/components/Dialog"
 
 function History() {
@@ -26,11 +26,7 @@ function History() {
         setSlugs(slugs)
     }, [user])
 
-    useEffect(() => {
-        setScrollDocument(isOpenDiaLog)
-    }, [isOpenDiaLog])
-
-    const handleDeleteAllComic = () => {
+    const handleDeleteHistory = () => {
         const historyStorage = storage.get('history-storage', {})
         historyStorage[user?.email] = {}
         setSlugs([])
@@ -109,7 +105,7 @@ function History() {
             </div>
             {isOpenDiaLog &&
                 <DiaLog
-                    onDeleteAll={handleDeleteAllComic}
+                    onDeleteHistory={handleDeleteHistory}
                     text={'Lịch sử xem hiện tại sẽ bị xoá vĩnh viễn?'}
                 />
             }

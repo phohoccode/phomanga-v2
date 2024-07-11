@@ -10,6 +10,7 @@ module.exports = {
                 'desktop': 'calc(100% - (128px + 180px + 32px))',
                 'mobile': 'calc(100% - 32px)',
                 'chapter-desktop': 'calc(10% - 11px)',
+                'chapter-table': 'calc(20% - 10px)',
                 'chapter-mobile': 'calc(33.33333% - 8px)'
             },
             screens: {
@@ -60,7 +61,7 @@ module.exports = {
                 },
                 heightIn: {
                     '0%': { height: '0' },
-                    '100%': { height: '50vh' }
+                    '100%': { height: '45vh' }
                 },
                 blurFilter: {
                     '0%': { backdropFilter: 'blur(0)' },

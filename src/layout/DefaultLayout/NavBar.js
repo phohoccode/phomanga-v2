@@ -40,7 +40,7 @@ function NavBar() {
                     <NavLink className={'flex-shrink-0 w-[40px] h-[40px] rounded-[8px] overflow-hidden'} to='/'>
                         <img className="" src={logo} />
                     </NavLink>}
-                <NavLink to='/' className="text-2xl text-[#10b981] font-[900]">
+                <NavLink to='/' className="lg:text-2xl mobile:text-xl text-[#10b981] font-[900]">
                     PHOMANGA-V2
                 </NavLink>
             </div>
@@ -51,10 +51,12 @@ function NavBar() {
                         onChange={e => setValueSearch(e.target.value)}
                         onKeyDown={(event) => handleKeyDownSearch(event, valueSearch)}
                         className="outline-none w-full ml-[12px] bg-[#fff] color-[#000] font-[600] bg-transparent dark:text-[#fff]"
-                        placeholder="Tìm kiếm..."
+                        placeholder="Tìm kiếm truyện..."
                     />
                     {valueSearch.length > 0 &&
-                        <button className="dark:text-[#fff]" onClick={() => setValueSearch("")}>
+                        <button
+                            title="Xoá nội dung"
+                            className="dark:text-[#fff] duration-300 hover:text-[#10b981]" onClick={() => setValueSearch("")}>
                             <i className="fa-solid fa-xmark p-[8px]"></i>
                         </button>}
                     <NavLink

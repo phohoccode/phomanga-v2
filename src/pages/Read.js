@@ -44,7 +44,7 @@ function Read() {
             setImages(dataChapter?.data?.item?.chapter_image || [])
             setChapterPath(dataChapter?.data?.item?.chapter_path)
             setSelectedChapter(params?.id)
-            
+
             const historyStorage = storage.get('history-storage', {})
 
             if (!historyStorage[user?.email]) {

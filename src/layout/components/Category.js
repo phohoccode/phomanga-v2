@@ -52,7 +52,7 @@ function Category({ data, setIsShowCategory, onCloseModalMobile }) {
                         </ul>
                     </div>
                 </div>) : (
-                <ul className='animate-height-in duration-300 overflow-y-auto h-[50vh] overscroll-y-none ml-[12px]'>
+                <ul className='animate-height-in duration-300 overflow-y-auto h-[45vh] overscroll-y-none ml-[12px]'>
                     {data?.data?.items.map((category, index) => (
                         <li key={index}>
                             <Link

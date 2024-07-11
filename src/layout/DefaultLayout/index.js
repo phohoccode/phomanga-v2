@@ -54,11 +54,12 @@ function DefaultLayout({ children }) {
                 />
             </div>
             {isShowButtonScroll &&
-                <div
+                <button
+                    title="Cuộn lên đầu trang"
                     onClick={scrollToTop} 
-                    className='w-[40px] flex items-center justify-center h-[40px] rounded-[8px] bg-[#10b981] fixed lg:bottom-[32px] lg:left-[32px] mobile:bottom-[16px] mobile:left-[16px] text-[#fff] animate-fade-in cursor-pointer hover:opacity-[.8] duration-300'>
+                    className='w-[40px] flex items-center justify-center h-[40px] rounded-[8px] bg-[#10b981] fixed lg:bottom-[32px] lg:left-[32px] mobile:bottom-[16px] mobile:left-[16px] text-[#fff] animate-fade-in cursor-pointer hover:scale-[1.05] duration-300'>
                     <i className="fa-solid fa-arrow-up"></i>
-                </div>
+                </button>
             }
         </div>
     );

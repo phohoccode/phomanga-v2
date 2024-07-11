@@ -7,10 +7,12 @@ function DiaLog(props) {
     const mainRef = useRef()
 
     const handleOkClick = () => {
+        // ?.() nếu có thì gọi
         props.onDeleteComment?.()
-        props.onDeleteAll?.()
+        props.onDeleteArchive?.()
+        props.onDeleteHistory?.()
         props.onDeleteComic?.()
-        props.onleDeleteActivity?.()
+        props.onDeleteActivity?.()
         setIsOpenDiaLog(false)
     }
 

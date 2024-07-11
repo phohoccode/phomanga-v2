@@ -27,7 +27,7 @@ function Info() {
     const [idRecently, setIdRecently] = useState('')
     const [isSave, setIsSave] = useState(false)
     const [isSort, setIsSort] = useState(false)
-    const [isCollapse, setIsCollapse] = useState(true)
+    const [isCollapse, setIsCollapse] = useState(false)
     const chapterInDesktop = 39
     const chapterInMobile = 14
 
@@ -52,6 +52,7 @@ function Info() {
             const historyStorage = storage.get('history-storage', {})
             const comic = historyStorage[user?.email]?.[params?.slug]
             const chapters = data?.data?.item?.chapters?.[0]?.server_data || []
+
             setInfoComic(data?.data?.item || [])
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
@@ -68,8 +69,9 @@ function Info() {
     useEffect(() => {
         const chapters =
             data?.data?.item?.chapters?.[0]?.server_data || []
+
         setChapters(
-            !isCollapse ?
+            isCollapse ?
                 chapters : (
                     width > 1024 ?
                         chapters.slice(0, chapterInDesktop) :
@@ -82,6 +84,7 @@ function Info() {
         const comicStorage = storage.get('comic-storage', {})
         const isSave = comicStorage[user?.email]?.some(
             comic => comic?.slug === params?.slug)
+
         setIsSave(isSave)
     }, [params.slug, user])
 
@@ -97,7 +100,7 @@ function Info() {
                         .includes(event.target.value.toLowerCase())
             )
         setChapters(
-            !isCollapse ? filterChapters : (
+            isCollapse ? filterChapters : (
                 width > 1024 ?
                     filterChapters.slice(0, chapterInDesktop) :
                     filterChapters.slice(0, chapterInMobile))
@@ -115,6 +118,7 @@ function Info() {
         if (!comicStorage[user?.email]) {
             comicStorage[user?.email] = []
         }
+
         comicStorage[user?.email] = [
             ...comicStorage[user?.email], data?.data?.item
         ]
@@ -145,7 +149,7 @@ function Info() {
             data?.data?.item?.chapters?.[0]?.server_data || []
         setIsSort(!isSort)
         setChapters(
-            !isCollapse ? chapters.reverse() : (
+            isCollapse ? chapters.reverse() : (
                 width > 1023 ?
                     chapters.reverse().slice(0, chapterInDesktop) :
                     chapters.reverse().slice(0, chapterInMobile)
@@ -275,7 +279,7 @@ function Info() {
                             {chapters.length > 0 ?
                                 <Fragment>
                                     {isSort ? (
-                                        <li className="lg:w-chapter-desktop mobile:w-chapter-mobile">
+                                        <li className="xl:w-chapter-desktop lg:w-chapter-table mobile:w-chapter-mobile">
                                             <Link
                                                 className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-sm transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] text-center"
                                                 to={`/read/${params.slug}/${data?.data?.item?.chapters?.[0]?.server_data[data?.data?.item?.chapters?.[0]?.server_data.length - 1]?.chapter_api_data
@@ -284,7 +288,7 @@ function Info() {
                                             </Link>
                                         </li>
                                     ) : (
-                                        <li className='lg:w-chapter-desktop mobile:w-chapter-mobile'>
+                                        <li className='xl:w-chapter-desktop lg:w-chapter-table mobile:w-chapter-mobile'>
                                             <Link
                                                 className="py-[4px] px-[12px] mobile:px-[8px] rounded-[8px] block text-sm transition-all hover:scale-[1.05] bg-[#10b981] text-[#fff] text-center"
                                                 to={`/read/${params.slug}/${data?.data?.item?.chapters?.[0]?.server_data[data?.data?.item?.chapters?.[0]?.server_data.length - 1]?.chapter_api_data
@@ -295,7 +299,7 @@ function Info() {
                                     )}
                                     {chapters.map((chapter, index) => (
                                         <li
-                                            className={` transition-all hover:scale-[1.05] rounded-[8px] lg:w-chapter-desktop mobile:w-chapter-mobile relative ${idStorage.includes(chapter?.chapter_api_data.split('/').pop()) ? "bg-[#10b981b3]" : 'bg-[#10b981]'}`}
+                                            className={` transition-all hover:scale-[1.05] rounded-[8px] xl:w-chapter-desktop   lg:w-chapter-table mobile:w-chapter-mobile relative ${idStorage.includes(chapter?.chapter_api_data.split('/').pop()) ? "bg-[#10b981b3]" : 'bg-[#10b981]'}`}
                                             key={index}>
                                             <Link
                                                 className="py-[4px] px-[12px] mobile:px-[8px]  block text-sm  text-[#fff] text-center"
@@ -314,11 +318,11 @@ function Info() {
                         {(width > 1024 ?
                             chapters.length >= chapterInDesktop :
                             chapters.length >= chapterInMobile) &&
-                            <div className="flex justify-center mt-[16px] ">
+                            <div className="flex justify-center mt-[16px]">
                                 <span
-                                    className="text-[#10b981] font-[900] cursor-pointer text-lg"
+                                    className="text-[#10b981] font-[900] cursor-pointer text-lg select-none"
                                     onClick={() => setIsCollapse(!isCollapse)}>
-                                    {isCollapse ? (
+                                    {!isCollapse ? (
                                         <Fragment>
                                             Xem thêm
                                             <i className="ml-[4px] fa-solid fa-angle-down"></i>

@@ -68,7 +68,7 @@ function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
                     <li
                         onClick={() => setCurrentPage(page)}
                         key={index}
-                        className={`text-lg transition-all hover:bg-[#ccc] rounded-[4px] border border-solid border-[#ccc] px-[8px] py-[4px] font-[600] min-w-[40px] text-center cursor-pointer ${page === currentPage ? 'bg-[#ccc]' : 'bg-[#fff]'}`}>{page}</li>
+                        className={`text-lg transition-all hover:bg-[#ccc] rounded-[4px] border border-solid border-[#ccc] px-[8px] py-[4px] font-[600] min-w-[40px] text-center cursor-pointer select-none ${page === currentPage ? 'bg-[#ccc]' : 'bg-[#fff]'}`}>{page}</li>
                 ))}
                 <li
                     onClick={handleNext}

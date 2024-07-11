@@ -10,7 +10,8 @@ function User() {
     const [avartar, setAvartar] = useState(user?.picture)
     const [background, setBackground] = useState(user?.background)
     const [recentActivity, setRecentActivity] = useState(() => {
-        const recentActivity = storage.get('recent-activity', {})
+        const recentActivity = 
+            storage.get('recent-activity', {})
         return recentActivity?.[user?.email] || []
     })
 
@@ -18,7 +19,8 @@ function User() {
         setAvartar(user?.picture)
         setBackground(user?.background)
         setRecentActivity(() => {
-            const recentActivity = storage.get('recent-activity', {})
+            const recentActivity = 
+                storage.get('recent-activity', {})
             return recentActivity?.[user?.email]?.reverse() || []
         })
     }, [user])
@@ -118,12 +120,11 @@ function User() {
                 </div>
             </div>
 
-            {isOpenDiaLog && 
+            {isOpenDiaLog &&
                 <DiaLog
-                    onleDeleteActivity={handleDeleteActivity}
+                    onDeleteActivity={handleDeleteActivity}
                     text='Hoạt động gần đây sẽ bị xoá vĩnh viễn?'
-                />
-            }
+                />}
         </Fragment>
     );
 }

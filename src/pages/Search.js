@@ -7,6 +7,7 @@ import { search } from "../api";
 import Pagination from "../layout/components/Pagination";
 import Context from "../state/Context";
 import { handleSetActivity } from "../utils";
+import searchNotFoundImage from '../assets/searchNotFound.png'
 
 function Search() {
     const { user } = useContext(Context)
@@ -48,11 +49,16 @@ function Search() {
                             `Không tìm kiếm được truyện phù hợp cho từ khoá ''${params.keyword}''`
                         }
                     </h4>
-                    <div className='flex mx-[-8px] flex-wrap gap-y-[24px]'>
+                    {result.length > 0 ? (<div className='flex mx-[-8px] flex-wrap gap-y-[24px]'>
                         {result.map((comic, index) => (
                             <Comic key={index} data={comic} />
                         ))}
-                    </div>
+                    </div>) : (
+                        <div className="flex items-center justify-center">
+                            <div
+                                style={{ backgroundImage: `url(${searchNotFoundImage})` }} className="lg:w-[30vw] lg:h-[420px] sm:w-[40vw] sm:h-[360px] mobile:w-[50vw] h-[300px] bg-cover bg-repeat bg-center "></div>
+                        </div>
+                    )}
                 </Fragment>}
             {result.length > 0 &&
                 <Pagination

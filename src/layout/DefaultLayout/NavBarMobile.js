@@ -63,8 +63,8 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
                         value={valueSearch}
                         onChange={e => setValueSearch(e.target.value)}
                         onKeyDown={(e) => handleSearch(e, valueSearch)}
-                        className="outline-none w-full ml-[12px] bg-[#fff] dark:text-[#fff] bg-transparent"
-                        placeholder="Tìm kiếm..."
+                        className="outline-none w-full ml-[6px] bg-[#fff] dark:text-[#fff] bg-transparent"
+                        placeholder="Tìm kiếm truyện..."
                     />
                     <NavLink onClick={handleCloseModal} className={`px-[8px] transition-all dark:text-[#fff] hover:text-[#10b981] ${valueSearch !== '' ? 'pointer-events-auto' : 'pointer-events-none'}`} to={`/search/${valueSearch}`}>
                         <i className="text-inherit fa-solid fa-magnifying-glass"></i>
@@ -73,6 +73,9 @@ function NavBarMobile({ setIsShowNavBarMobile, category, handleKeyDownSearch }) 
                 <ul className="mt-[12px]">
                     <li onClick={handleCloseModal}>
                         <NavLink to='/' className={`block text-lg hover:text-[#10b981] transition-all py-[8px] ${pathname === '/' ? 'text-[#10b981] font-[900]' : 'text-[#000] dark:text-[#fff]'}`}>Trang chủ</NavLink>
+                    </li>
+                    <li onClick={handleCloseModal}>
+                        <NavLink to='/detail/danh-sach/truyen-moi' className={`block text-lg hover:text-[#10b981] transition-all py-[8px] ${pathname === '/detail/danh-sach/truyen-moi' ? 'text-[#10b981] font-[900]' : 'text-[#000] dark:text-[#fff]'}`}>Truyện mới nhất</NavLink>
                     </li>
                     <li onClick={handleCloseModal}>
                         <NavLink to='/archive' className={`block text-lg hover:text-[#10b981] transition-all py-[8px] ${pathname === '/archive' ? 'text-[#10b981] font-[900]' : 'text-[#000] dark:text-[#fff]'}`}>Kho lưu trữ</NavLink>

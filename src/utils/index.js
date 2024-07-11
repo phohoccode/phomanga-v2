@@ -77,35 +77,35 @@ export function handleSetActivity(user, data, type) {
 
     switch (type) {
         case 'addComic': {
-            newData = `Đã thêm truyện ${data?.data?.item?.name} vào kho lưu trữ`
+            newData = `Thêm truyện ${data?.data?.item?.name} vào kho lưu trữ`
             break
         }
         case 'removeComic': {
-            newData = `Đã xoá truyện ${data?.data?.item?.name} khỏi kho lưu trữ`
+            newData = `Xoá truyện ${data?.data?.item?.name} khỏi kho lưu trữ`
             break
         }
         case 'readComic': {
-            newData = `Đã đọc truyện ${data?.data?.item?.comic_name} - Chương ${data?.data?.item?.chapter_name}`
+            newData = `Đọc truyện ${data?.data?.item?.comic_name} - Chương ${data?.data?.item?.chapter_name}`
             break
         }
         case 'search': {
-            newData = `Đã tìm kiến từ khoá "${data}"`
+            newData = `Tìm kiếm từ khoá "${data}"`
             break
         }
         case 'archive': {
-            newData = 'Đã xoá tất cả truyện khỏi kho lưu trữ'
+            newData = 'Xoá tất cả truyện khỏi kho lưu trữ'
             break
         }
         case 'history': {
-            newData = 'Đã xoá lịch sử đọc truyện'
+            newData = 'Xoá lịch sử đọc truyện'
             break
         }
         case 'changeAvartar': {
-            newData = 'Đã thay đổi ảnh đại diện'
+            newData = 'Thay đổi ảnh đại diện'
             break
         }
         case 'changeBackground': {
-            newData = 'Đã thay đổi ảnh bìa'
+            newData = 'Thay đổi ảnh bìa'
             break
         }
         case 'addComment': {
@@ -113,7 +113,7 @@ export function handleSetActivity(user, data, type) {
             const comicName = dataChapter?.data?.item?.comic_name
             const chapterName = dataChapter?.data?.item?.chapter_name
 
-            newData = `Đã bình luận "${valueComment}" tại truyện ${comicName} - Chương ${chapterName}`
+            newData = `Bình luận "${valueComment}" tại truyện ${comicName} - Chương ${chapterName}`
             break
         }
         case 'removeComment': {
@@ -121,7 +121,7 @@ export function handleSetActivity(user, data, type) {
             const comicName = dataChapter?.data?.item?.comic_name
             const chapterName = dataChapter?.data?.item?.chapter_name
 
-            newData = `Đã xoá bình luận "${valueComment}" tại truyện ${comicName} - Chương ${chapterName}`
+            newData = `Xoá bình luận "${valueComment}" tại truyện ${comicName} - Chương ${chapterName}`
             break
         }
         case 'editComment': {
@@ -129,7 +129,7 @@ export function handleSetActivity(user, data, type) {
             const comicName = dataChapter?.data?.item?.comic_name
             const chapterName = dataChapter?.data?.item?.chapter_name
 
-            newData = `Đã sửa bình luận "${valueComment}" thành "${valueEditComment}" tại truyện ${comicName} - Chương ${chapterName}`
+            newData = `Sửa bình luận "${valueComment}" thành "${valueEditComment}" tại truyện ${comicName} - Chương ${chapterName}`
             break
         }
         case 'deleteChapter': {
@@ -137,7 +137,7 @@ export function handleSetActivity(user, data, type) {
             const chapterName = historyStorage[user?.email][slug][index]?.data?.item?.chapter_name
             const comicName = historyStorage[user?.email][slug][index]?.data?.item?.comic_name
 
-            newData = `Đã xoá chương ${chapterName} truyện ${comicName} khỏi lịch sử đã xem`
+            newData = `Xoá chương ${chapterName} truyện ${comicName} khỏi lịch sử đã xem`
             break
         }
         default: {
