@@ -91,7 +91,7 @@ function User() {
                     </div>
                     <div className='mt-[12px] flex gap-[12px] items-center'>
                         <span className='font-[600] text-[#10b981]'>Email:</span>
-                        <span className='font-[600]'>{user?.email}</span>
+                        <span className='font-[600] break-word'>{user?.email}</span>
                     </div>
                 </div>
                 <div className='rounded-[16px] p-[16px] border border-solid border-[#e3e3e3] dark:border-[#636363] dark:text-[#fff] flex-[2] h-full'>

@@ -38,7 +38,7 @@ function NavBar() {
             <div className="flex gap-[12px] items-center">
                 {width > 1024 &&
                     <NavLink className={'flex-shrink-0 w-[40px] h-[40px] rounded-[8px] overflow-hidden'} to='/'>
-                        <img className="" src={logo} />
+                        <img src={logo} alt="logo"/>
                     </NavLink>}
                 <NavLink to='/' className="lg:text-2xl mobile:text-xl text-[#10b981] font-[900]">
                     PHOMANGA-V2
