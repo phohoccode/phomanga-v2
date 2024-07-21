@@ -34,10 +34,6 @@ function Detail() {
         setCurrentPage(1)
     }, [params.slug, params.describe])
 
-    useEffect(() => {
-        scrollToTop()
-    }, [currentPage])
-
     return (
         <Fragment>
             {!data && <h4 className='lg:text-2xl mobile:text-xl font-[600] dark:text-[#fff]'>Đang tải dữ liệu...</h4>}

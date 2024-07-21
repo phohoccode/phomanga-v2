@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import toast from "react-hot-toast"
 
-import { scrollToTop } from "../../utils"
-
 function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
     const [pageNumbers, setPageNumbers] = useState([])
     const start = useRef(0)
@@ -30,13 +28,11 @@ function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
             pagination.push(i)
         }
         setPageNumbers(pagination)
-        console.log(pagination);
     }, [currentPage, totalPage, itemsPerPage])
 
 
     useEffect(() => {
         toast(`Bạn đang ở trang ${currentPage}`, { duration: 1000 })
-        scrollToTop()
     }, [currentPage])
 
     const handlePrev = () => {
