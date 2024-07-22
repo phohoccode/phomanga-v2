@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 import { detail } from '../api';
 import useFetch from '../hooks/UseFetch';
-import { scrollToTop } from '../utils';
 import Context from '../state/Context';
 import Comic from '../layout/components/Comic';
 import Pagination from '../layout/components/Pagination';
